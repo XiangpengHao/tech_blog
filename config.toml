@@ -1,0 +1,9 @@
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "Xiangpeng Hao"
+theme = "kiss"
+copyright = "&copy; <a href=\"https://github.com/HaoPatrick\">Xiangpeng Hao</a> 2018"
+[params.social]
+
+github = "HaoPatrick"
+linkedin = "hao-xiangpeng"
