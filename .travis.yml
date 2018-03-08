@@ -8,7 +8,7 @@ script:
 deploy:
   - provider: script
     skip_cleanup: true
-    script: chmod +x ./deploy.sh && ./deploy.sh
+    script: chmod +x $TRAVIS_BUILD_DIR/deploy.sh && $TRAVIS_BUILD_DIR/deploy.sh
     on:
       branch: master
 
