@@ -1,4 +1,4 @@
-baseURL = "https://blog.haoxp.xyz/"
+# baseURL = "https://blog.haoxp.xyz/"
 languageCode = "en-us"
 title = "Xiangpeng Hao"
 theme = "kiss"
