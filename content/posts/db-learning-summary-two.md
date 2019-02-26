@@ -1,5 +1,5 @@
 ---
-title: "Db Learning Summary Two"
+title: "Database System Learning Summary Two"
 date: 2019-02-25T20:24:45-08:00
 draft: false
 ---
