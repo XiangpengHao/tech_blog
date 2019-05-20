@@ -7,7 +7,7 @@ draft: false
 ## SIMD Background
 SIMD (Single Instruction Multiple Data) is a term refers to *instruction-level parallelism*, one register carries multiple data and do the computation during a single instruction. The following figure shows the different level of parallelism.
 
-![level-para](../../static/img/level-para.png)
+![level-para](/img/level-para.png)
 
 Multi-thread programming (task level) is known to have very high overhead, especially on small task parallelism, while SIMD (instruction level) has almost zero overhead on CPU.
 
@@ -62,7 +62,7 @@ Compile the code with following command:
 
 `-O3` enables all optimization, `-march` allows the compiler using the native ISA.
 
-![1558335250057](../../static/img/1558335250057.png)
+![1558335250057](/img/1558335250057.png)
 
 Here we go.
 
@@ -74,10 +74,10 @@ Here we go.
 
 ##### Enable `-Ofast`:
 
-![1558335420257](../../static/img/1558335420257.png)
+![1558335420257](/img/1558335420257.png)
 
 
 
 ##### Using `clang`:
 
-![1558335477506](../../static/img/1558335477506.png)
+![1558335477506](/img/1558335477506.png)
