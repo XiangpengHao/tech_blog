@@ -72,12 +72,12 @@ Here we go.
 
 ## Bonus
 
-##### Enable `-Ofast`:
+Enable `-Ofast`:
 
 ![1558335420257](/img/1558335420257.png)
 
 
 
-##### Using `clang`:
+Using `clang`:
 
 ![1558335477506](/img/1558335477506.png)
