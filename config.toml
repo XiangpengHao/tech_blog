@@ -2,7 +2,7 @@ baseURL = "/"
 languageCode = "en-us"
 title = "Xiangpeng Hao"
 theme = "kiss"
-copyright = "&copy; <a href=\"https://github.com/HaoPatrick\">Xiangpeng Hao</a> 2018"
+copyright = "&copy; <a href=\"https://github.com/HaoPatrick\">Xiangpeng Hao</a> 2019"
 googleAnalytics = "UA-66103952-7"
 [params.social]
 ahome = "www.haoxp.xyz"
