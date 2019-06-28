@@ -8,6 +8,16 @@ draft: false
 
 先给这个 diary 定下以流水帐为主，娱乐为辅的基调。如果偶尔能有点学术的光芒，一定是你想多了。原则上我应该用 English 写，但 English 只适合用来陈述事实，不适合用来表达情感，有违我的初衷。（但我的朋友们用的是 English 所以我也不能写太多中文）
 
+### June 27th
+Today is nothing but debugging. Writing lock-free multi-thread application is extremely difficult, as it takes unbearably time and effort to debug. 
+There's no tools that can help, there's no rules/hints that can guide you to implement ideas correctly. The best debugger is your brain, said tz.
+
+Apart from this, I got an update from Brian, he really has a lot of things to do, and time is very limited, as he'll start a new journey in California (FB). If he can finish the writing soon, I'll be able to submit my third paper this year :)
+
+Last thing is TA office hour, it's now a place for me to practice speaking and listening, and most importantly, how to express ideas. 
+Nevertheless, TA session is very boring and students keeps asking questions that make you feel helpless -- you can't explain what's scheduling to students who don't understand what is thread.  
+
+
 ### June 25th
 Meeting all day, did almost nothing. The only thing worth talking is the proof in the `FPTree` paper. 
 I almost had the same solution as `FPTree`, I talked to tz, he told me someone has already implemented the idea :(
