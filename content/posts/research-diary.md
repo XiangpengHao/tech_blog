@@ -8,6 +8,17 @@ draft: false
 
 先给这个 diary 定下以流水帐为主，娱乐为辅的基调。如果偶尔能有点学术的光芒，一定是你想多了。原则上我应该用 English 写，但 English 只适合用来陈述事实，不适合用来表达情感，有违我的初衷。（但我的朋友们用的是 English 所以我也不能写太多中文）
 
+### June 28th
+More debugging today, so nothing special on my project. 
+
+The biggest thing is a 学弟 joined us, he took the CMPT 454 course this term, and is very active on the project milestones. So I tentatively asked if he would like to join us and dig more into the area. And he said yes.
+
+Concurrently Working on three projects (four if including Brian's paper) is too much for me, the cost of context switch between different projects is too high to be sustainable.
+学弟 has sufficient knowledge on both high performance computing and c++ programming language, looking forward to work with him!
+
+One last thing is swimming, better than last time, I feel just comfortable. I enjoy the relaxing time after swimming. And the 烧烤 is nice as well! Nice day! 
+
+
 ### June 27th
 Today is nothing but debugging. Writing lock-free multi-thread application is extremely difficult, as it takes unbearably time and effort to debug. 
 There's no tools that can help, there's no rules/hints that can guide you to implement ideas correctly. The best debugger is your brain, said tz.
