@@ -8,6 +8,25 @@ draft: false
 
 先给这个 diary 定下以流水帐为主，娱乐为辅的基调。如果偶尔能有点学术的光芒，一定是你想多了。原则上我应该用 English 写，但 English 只适合用来陈述事实，不适合用来表达情感，有违我的初衷。（但我的朋友们用的是 English 所以我也不能写太多中文）
 
+### June 29th
+Research is about time management. 
+I feel less productive and less efficient these days, if I remember correctly, it begins from the day I joined Kevel's project.
+
+I obviously under-estimated the over-head of working on multiple projects at the same time, especially when working on more than four parts:
+1. I have my main stream research topic 
+2. A project just started with another AP in our lab 
+3. A project lead by a visiting PhD student, and he needs my effort the catch the FAST 2019 deadline 
+4. My old previous IEEE TIP paper. 
+And I'll need to help with tz's course project.
+
+That's definitely too much for me, in the terminology of Operating System, we call this phenomenon [`thrashing`](https://en.wikipedia.org/wiki/Thrashing_(computer_science)).
+
+Nevertheless, it makes me realized time managing is vital to successful research, and I should be brave to say no. 
+What's more, I should probably learn to use resources around me to boost my research, instead of taking everything on my shoulder.
+
+Looking forward to see a more organized tomorrow :)
+
+
 ### June 28th
 More debugging today, so nothing special on my project. 
 
