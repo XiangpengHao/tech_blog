@@ -15,6 +15,7 @@ I tried my new ideas on numa-aware index, the prototype doesn't show expected nu
 So all my work today is to design mini benchmarks to figure out why the experiment results don't match with my expectation.
 
 Programming in numa sockets, I take the following factors into consideration:
+
 1. Cache hit, did we really issue a memory load, or just used the cached values. So to simulate the real-world workload, I evicted the whole last level cache between tests.
 
 2. Cost of re-scheduling. How costly it is for on-fly context switch. Cost of rescheduling is the most important criteria to achieve beneficial numa optimization, as it's a trade-off between context switch and remote memory access.
