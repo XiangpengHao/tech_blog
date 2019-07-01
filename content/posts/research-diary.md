@@ -8,6 +8,24 @@ draft: false
 
 先给这个 diary 定下以流水帐为主，娱乐为辅的基调。如果偶尔能有点学术的光芒，一定是你想多了。原则上我应该用 English 写，但 English 只适合用来陈述事实，不适合用来表达情感，有违我的初衷。（但我的朋友们用的是 English 所以我也不能写太多中文）
 
+### June 30th
+Major: bg's birthday; Minor: research obstacles.
+
+I tried my new ideas on numa-aware index, the prototype doesn't show expected numbers.
+So all my work today is to design mini benchmarks to figure out why the experiment results don't match with my expectation.
+
+Programming in numa sockets, I take the following factors into consideration:
+1. Cache hit, did we really issue a memory load, or just used the cached values. So to simulate the real-world workload, I evicted the whole last level cache between tests.
+
+2. Cost of re-scheduling. How costly it is for on-fly context switch. Cost of rescheduling is the most important criteria to achieve beneficial numa optimization, as it's a trade-off between context switch and remote memory access.
+
+3. CPU pipelines, with very regular workload, modern CPU is capable of maintaining a quite low branch prediction miss rate, thus can hide the memory access latency due to predictable pre-fetch.
+While in the real-world cases, the workload tends to be very irregular thus less predictable. Trivial tests might not be enough to demonstrate the numa-effect.
+
+In my today's experiments, I only take the first two into account, and for remote memory access, the performance only drops ~12%, while the expected number is 50%.
+
+I might need to design a complex work load and try again tomorrow.
+
 ### June 29th
 Research is about time management. 
 I feel less productive and less efficient these days, if I remember correctly, it begins from the day I joined Kevel's project.
