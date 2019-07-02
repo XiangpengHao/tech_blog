@@ -8,6 +8,14 @@ draft: false
 
 先给这个 diary 定下以流水帐为主，娱乐为辅的基调。如果偶尔能有点学术的光芒，一定是你想多了。原则上我应该用 English 写，但 English 只适合用来陈述事实，不适合用来表达情感，有违我的初衷。（但我的朋友们用的是 English 所以我也不能写太多中文）
 
+### July 1st
+Listen to this if you haven't: https://www.youtube.com/watch?v=EBfFnhnUbzo
+
+Other things: begin my series on NUMA and Scheduling, checkout here: https://blog.haoxp.xyz/posts/numa-vs-context-switch
+
+Happy Canada Day!
+
+
 ### June 30th
 Major: bg's birthday; Minor: research obstacles.
 

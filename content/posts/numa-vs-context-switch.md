@@ -1,5 +1,5 @@
 ---
-title: "Cost of NUMA vs Context Switch"
+title: "Cost of NUMA vs Context Switch, Part 1"
 date: 2019-07-01T19:26:19-07:00
 draft: false
 ---
