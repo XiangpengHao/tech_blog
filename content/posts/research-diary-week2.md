@@ -4,6 +4,11 @@ date: 2019-07-02T22:08:58-07:00
 draft: false 
 ---
 
+July 3rd
+
+Nothing today.
+
+
 July 2nd
 
 If you're interested in my previous week, checkout the week 1: https://blog.haoxp.xyz/posts/research-diary/
