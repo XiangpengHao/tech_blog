@@ -14,7 +14,7 @@ Some other thoughts: is human being capable of handling lock-free concurrency da
 
 The answer (for now) is NO. We don't have enough tools for correctness proofing and debugging.
 
-Both tasks are hugely rely on a small group of people, their proof can have holes, their implementation can be incorrect, and nobody can find it util everything explodes.
+Both tasks are hugely rely on a small group of people, their proof can have holes, their implementation can be incorrect, and nobody can find it util the system explodes.
 
 We (the society) desperately need tools that can build reliable infrastructures, that's why I show huge respect to the rust community, they're not perfect, but a step forward to the ultimate goal.  
 
