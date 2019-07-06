@@ -5,7 +5,8 @@ draft: false
 ---
 
 
-July 6th
+### July 6th
+
 Another Saturday arrives, time flies and I realized the nature of research is probably being slow.
 
 You'll need to think, writing code doesn't mean you're doing something, and writing nothing doesn't mean you contributed nothing.
@@ -19,13 +20,14 @@ Both tasks are hugely rely on a small group of people, their proof can have hole
 We (the society) desperately need tools that can build reliable infrastructures, that's why I show huge respect to the rust community, they're not perfect, but a step forward to the ultimate goal.  
 
 
-July 5th
+### July 5th
 
 Nothing today. Friday, have a nice tennis with bg.
 
 OverWatch ranked 150+ SR, nice huge plays.
 
-July 4th
+### July 4th
+
 My series for NUMA vs Re-scheduing will probably stop at part 1, as there're some mysterious results that none of our team can figure out.
 
 The mini benchmark is hugely coupled with too many different factors, like memory/cache/cpu pipeline/compiler optimization/cross socket cache coherence policy etc.
@@ -36,12 +38,12 @@ Anyway, the final take away/decision is, re-scheduling generally has higher over
 
 
 
-July 3rd
+### July 3rd
 
 Nothing today.
 
 
-July 2nd
+### July 2nd
 
 If you're interested in my previous week, checkout the week 1: https://blog.haoxp.xyz/posts/research-diary/
 
