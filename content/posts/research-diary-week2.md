@@ -4,6 +4,29 @@ date: 2019-07-02T22:08:58-07:00
 draft: false 
 ---
 
+### July 7th
+
+Context: modern in-memory b+ tree variant.
+
+#### Why CoW?
+
+Internal nodes need to maintain sorted order, so that search don't need to load the whole node
+
+Any sorting algorithm will require more than 8-byte write, which is not feasible in the persistent memory/lock-free concurrency era.
+
+So the modern b+ tree structures used copy-on-write strategy to address the problem.
+The basic assumption of CoW is unlimited memory bandwidth, this assumption, however, is not always satisfied (as shown in our latest paper), and it might incur extra overhead (e.g. pressure on memory allocator).
+
+
+
+#### How do we design mutable internal node?
+
+the idea is to have smaller keys -> more keys in a cache line -> CPU time remains the same, but IO time greatly reduced.
+1. Similar CPU time: we still need to compare every keys in a node
+2. Smaller IO/data time: less cache line to be loaded 
+
+We can use SIMD instructions to reduce the CPU time.
+
 
 ### July 6th
 
