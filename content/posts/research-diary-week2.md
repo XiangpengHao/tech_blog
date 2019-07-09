@@ -4,6 +4,14 @@ date: 2019-07-02T22:08:58-07:00
 draft: false 
 ---
 
+### July 8th
+
+Nothing special today, interesting part of researching has passed, the remaining are mostly boring and tedious.
+
+What keeps me continuing is ... (tell me if you know)
+
+
+
 ### July 7th
 
 Context: modern in-memory b+ tree variant.
