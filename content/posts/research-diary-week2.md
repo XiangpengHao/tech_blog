@@ -4,6 +4,31 @@ date: 2019-07-02T22:08:58-07:00
 draft: false 
 ---
 
+### July 10th
+Got two things to talk.
+
+When reading the news and looking at what's happening around the world, a lab in Stanford catch my eyes.
+The `future data systems`: http://futuredata.stanford.edu/
+
+In their homepage, they said:
+>We are interested in two types of systems:
+> 1. Systems that are at least an order of magnitude better than the competition ("10x systems").
+> 
+> 2. Systems that are the first of their kind ("0 to 1 systems").
+> 
+> 10x systems are almost always powered by smart algorithms and/or clever use (or disuse) of hardware. 0 to 1 systems are enabled by creativity, audacity, and raw ambition. We build both.
+
+I was really impressed by their idealism goals, and (kind of) shame of what I'm doing.
+
+My life is full of people talking about papers/publications/grad schools, they judge people by which conference their paper went to (instead of what contributions that paper made), or which grad school/prof they applied (instead of what their own goals and plans).
+
+I admit they might eventually be the winners/somebody, but I just don't like them being [exquisite egoists](https://laitman.com/2013/08/exquisite-egoists/).
+
+I imagined the ultimate honor of my whole life, would be a scientist who devote all his life to improving human civilization, like what [Valery Legasov](https://en.wikipedia.org/wiki/Valery_Legasov) did for the Soviet Union.   
+
+The other thing I would like to mention is (let's save for tomorrow) 
+
+
 ### July 9th
 Meeting and TA all the day, nothing special.
 
