@@ -11,7 +11,9 @@ When reading the news and looking at what's happening around the world, a lab in
 The `future data systems`: http://futuredata.stanford.edu/
 
 In their homepage, they said:
+
 >We are interested in two types of systems:
+
 > 1. Systems that are at least an order of magnitude better than the competition ("10x systems").
 > 
 > 2. Systems that are the first of their kind ("0 to 1 systems").
