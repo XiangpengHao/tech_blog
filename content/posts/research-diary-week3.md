@@ -1,6 +1,6 @@
 ---
-title: "Research Diary Week2"
-date: 2019-07-12T22:08:58-07:00
+title: "Research Diary Week 3"
+date: 2019-07-12T12:08:58-07:00
 draft: false 
 ---
 
