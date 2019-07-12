@@ -5,17 +5,14 @@ before_install:
 script:
 - hugo
 
-deploy:
-  - provider: script
-    skip_cleanup: true
-    script: rsync -avzhe ssh ./public/ hao@vul.haoxp.xyz:/home/hao/tech_blog
-    on:
-      branch: master
-
 before_deploy:
-- openssl aes-256-cbc -K $encrypted_b30cc9581a71_key -iv $encrypted_b30cc9581a71_iv
-  -in deploy_tmp.enc -out /tmp/deploy_tmp -d
-- eval "$(ssh-agent -s)"
-- chmod 600 /tmp/deploy_tmp
-- ssh-add /tmp/deploy_tmp
-- ssh-keyscan vul.haoxp.xyz >> ~/.ssh/known_hosts
+- echo blog.haoxp.xyz > public/CNAME
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: public 
+  target-branch: gh-pages
+  on:
+    branch: master 
