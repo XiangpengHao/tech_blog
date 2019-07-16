@@ -14,7 +14,7 @@ So I decide to make a new benchmark wrapper from scratch, I don't like it, but i
 This is partly because users of C++ tends to care quite different aspect of the language, some cares more on programmability, some cares more about performance. 
 These people simply can not reach agreement on most design choices.
 
-As for me, performance is always the first-class citizens of my programming patterns, 
+As for me, performance is always the first-class citizens, 
 I understand there're so many factors that can impact overall performance, so I just don't trust most people's implementation,
 and would like to review every lines of code in my project if possible.
 
