@@ -5,7 +5,7 @@ draft: false
 ---
 
 ### July 16th
-Check out my talk today [numa-aware-bench-result](/pdf/numa-aware-bench-result.pdf)[^1], basically discuss about some common factors that will impact the performance of a multi-thread system.
+Check out my talk today [numa-aware-bench-result](/pdf/numa-aware-bench-results.pdf)[^1], basically discuss about some common factors that will impact the performance of a multi-thread system.
 
 Take away: (even) for trivial workload, it's not always beneficial to go multi-thread, [`false-sharing`](https://en.wikipedia.org/wiki/False_sharing) and `NUMA-effects` will limit the concurrency.
 
