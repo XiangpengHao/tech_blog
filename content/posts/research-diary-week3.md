@@ -4,6 +4,19 @@ date: 2019-07-12T12:08:58-07:00
 draft: false 
 ---
 
+### July 16th
+Check out my talk today [numa-aware-bench-result](/pdf/numa-aware-bench-result.pdf)[^1], basically discuss about some common factors that will impact the performance of a multi-thread system.
+
+Take away: (even) for trivial workload, it's not always beneficial to go multi-thread, [`false-sharing`](https://en.wikipedia.org/wiki/False_sharing) and `NUMA-effects` will limit the concurrency.
+
+Multi-thread system is hard to implement correctly, let alone efficiently. 
+
+Very subtle implementation differences will have huge impact on overall performance, that's the root of all evil. 
+
+
+[^1]: `cacophony` is part of my new project, so just ignore it.
+
+
 ### July 15th
 Today implemented the benchmark and will present the results to Keval tomorrow.
 
