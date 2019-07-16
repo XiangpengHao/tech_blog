@@ -4,6 +4,23 @@ date: 2019-07-12T12:08:58-07:00
 draft: false 
 ---
 
+### July 15th
+Today implemented the benchmark and will present the results to Keval tomorrow.
+
+I tried Google Benchmark but finally decide to get rid of it. 
+The problem with Google Benchmark is they seems to have very mysterious and complex concepts, which, introduces more difficulties to explain the already black-boxed benchmark results.
+
+So I decide to make a new benchmark wrapper from scratch, I don't like it, but it's the state of C++ echo system, people like to re-invent everything and just don't trust most third party libraries.
+This is partly because users of C++ tends to care quite different aspect of the language, some cares more on programmability, some cares more about performance. 
+These people simply can not reach agreement on most design choices.
+
+As for me, performance is always the first-class citizens of my programming patterns, 
+I understand there're so many factors that can impact overall performance, so I just don't trust most people's implementation,
+and would like to review every lines of code in my project if possible.
+
+Some other thoughts: latch-free programming is really energy-consuming. It's meaningless and don't worth the efforts.
+
+
 ### July 12th
 
 There's a very famous research pattern in the system group, people do experiment-oriented research.
