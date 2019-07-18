@@ -4,6 +4,21 @@ date: 2019-07-12T12:08:58-07:00
 draft: false 
 ---
 
+### July 17th
+I was a fan of recursive programming, I liked to write recursive code that literally nobody understand.
+
+But that's not the pattern for persistent memory programming. 
+Recursions have implicit single-direction data dependency, say, A -> B -> C -> D, while in most cases of persistent memory/lock free programming, there's no such easy, single-direction data dependency, 
+because the logic for current state will largely depend on the previous state, or it's common to frequently check the previous state.
+
+Say when a thread read a value `A`, and based on the value read, the thread performed some computations, these computations are valid only when `A` stays unchanged.
+So before the new computations can be committed, the thread need to check the state of previous value (at least).
+
+That is where the circular data/logic dependency exists, and this dependency breaks the recursion.
+
+I'm painfully rewriting some of my recursive code to their loop-based ones, so that when state changes, it's easier to access the previous states.
+
+
 ### July 16th
 Check out my talk today [numa-aware-bench-result](/pdf/numa-aware-bench-results.pdf)[^1], basically discuss about some common factors that will impact the performance of a multi-thread system.
 
