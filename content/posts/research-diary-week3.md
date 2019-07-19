@@ -4,6 +4,10 @@ date: 2019-07-12T12:08:58-07:00
 draft: false 
 ---
 
+### July 18th
+My research progress is a bit slower than I expected, anyway, no much progress today.
+
+
 ### July 17th
 I was a fan of recursive programming, I liked to write recursive code that literally nobody understand.
 
