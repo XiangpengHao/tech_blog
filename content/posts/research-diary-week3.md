@@ -4,6 +4,22 @@ date: 2019-07-12T12:08:58-07:00
 draft: false 
 ---
 
+### July 19th
+
+First of all, happy birthday!
+
+I spent my whole day struggling with a very strange bug...
+
+My implementation is cursed by lock-free concurrency, I totally absolutely have no idea why it does work,
+and I've tried all my possible ways trying to figure it out (but failed).
+
+I spend two hours to reproduce the bug, and another two hours to locate the possible causes,
+and yes again, another two hours just to find they are perfectly fine.
+
+I might be a little bit too rush to finish the implementation, I should calm down and use my brain to debug, even harder.
+
+
+
 ### July 18th
 My research progress is a bit slower than I expected, anyway, no much progress today.
 
