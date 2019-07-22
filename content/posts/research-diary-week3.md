@@ -4,6 +4,22 @@ date: 2019-07-12T12:08:58-07:00
 draft: false 
 ---
 
+### July 21th
+
+Almost figured out how linear hashing work.
+
+From my very beginning experience, hash table has less variant than b+ tree.
+Probably because there're less things you can work on to make a hash table working -- 
+it has already decent point query performance, and there's nothing you can do to make range scan (even a little bit) faster.
+
+And since I've suspended my main project, I got more time to work on other various things, and got chances to think from different aspects.
+
+I like people writing code in C programming language, when reading their code, I'm reading logics, instead of language syntax and design patterns.
+Research projects are enough difficult to understand, 
+and literally nobody cares what engineering efforts you have spent to make your project scalable, that's not your goal after all.
+
+That's why I don't like C++ as a research programming language. A thousands people have a thousands ways to write in C++, and none/all of them work. It just introduces more confusion to the only-valuable research idea(s). 
+
 ### July 19th
 
 First of all, happy birthday!
