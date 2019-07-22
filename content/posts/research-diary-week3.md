@@ -9,7 +9,7 @@ draft: false
 Almost figured out how linear hashing work.
 
 From my very beginning experience, hash table has less variant than b+ tree.
-Probably because there're less things you can work on to make a hash table working -- 
+Probably because there're less things you can work on to make a hash table different -- 
 it has already decent point query performance, and there's nothing you can do to make range scan (even a little bit) faster.
 
 And since I've suspended my main project, I got more time to work on other various things, and got chances to think from different aspects.
