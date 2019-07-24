@@ -4,7 +4,10 @@ date: 2019-07-22T12:08:58-07:00
 draft: false 
 ---
 
-### July 22
+### July 23th
+Check out this post: https://blog.haoxp.xyz/posts/check-bit-set/
+
+### July 22th
 
 First thing, before this term started, I was trying to make a paper before I apply for grad schools, 
 but now, I almost admit that it's impossible to make a database system paper within half a year.
