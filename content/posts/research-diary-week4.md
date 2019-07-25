@@ -4,8 +4,13 @@ date: 2019-07-22T12:08:58-07:00
 draft: false 
 ---
 
+### July 24th
+
+Checkout my presentation today: [benchmark on read-mostly workload](/pdf/read-mostly-bench.pdf)
+
+
 ### July 23th
-Check out this post: https://blog.haoxp.xyz/posts/check-bit-set/
+Checkout this post: https://blog.haoxp.xyz/posts/check-bit-set/
 
 ### July 22th
 
