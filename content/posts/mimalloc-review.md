@@ -1,7 +1,7 @@
 ---
 title: "Modern allocator: mimalloc"
 date: 2019-07-26T17:36:49-07:00
-draft: true
+draft: false
 ---
 
 Memory management, especially memory allocation has been a important bottleneck of high performance multi-thread systems.
