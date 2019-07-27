@@ -4,6 +4,11 @@ date: 2019-07-22T12:08:58-07:00
 draft: false 
 ---
 
+### July 26th
+
+Checkout my new post on modern allocators https://blog.haoxp.xyz/posts/mimalloc-review/
+
+
 ### July 24th
 
 Checkout my presentation today: [benchmark on read-mostly workload](/pdf/read-mostly-bench.pdf)
