@@ -1,7 +1,7 @@
 ---
 title: "Characteristics of Huge Pages"
 date: 2019-07-29T17:09:36-07:00
-draft: true 
+draft: false 
 ---
 
 This post is more like a cheat sheet for huge pages, some details need to be updated later.
