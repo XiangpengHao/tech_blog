@@ -4,6 +4,10 @@ date: 2019-07-22T12:08:58-07:00
 draft: false 
 ---
 
+### July 30th
+
+Checkout new post on huge pages https://blog.haoxp.xyz/posts/characteristics-of-hugepages/
+
 ### July 29th
 
 Writing a new post, coming soon.
