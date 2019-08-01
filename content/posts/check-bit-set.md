@@ -91,3 +91,5 @@ Most compilers (icc, gcc, MSVC) don't, but clang do.
 
 You can select gcc in the mini benchmark to get a reversed benchmark result :)
 
+
+{{ template "_internal/disqus.html" . }}

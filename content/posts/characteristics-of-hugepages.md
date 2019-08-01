@@ -71,3 +71,7 @@ Modern kernel should have a "direct mode", in which applications ask for memory 
 [^3]: [HUGE PAGES AND TRANSPARENT HUGE PAGES](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/performance_tuning_guide/s-memory-transhuge)
 
 [^4]: Coordinated and Efficient Huge Page Management with Ingens
+
+
+{{ template "_internal/disqus.html" . }}
+

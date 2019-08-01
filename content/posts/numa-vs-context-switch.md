@@ -74,3 +74,5 @@ Results are reserved for next post.
 
 [^3]: `clflush` is not the best way to evict cache line, but all other ways don't seem to work :(
 
+
+{{ template "_internal/disqus.html" . }}

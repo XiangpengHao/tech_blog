@@ -56,3 +56,6 @@ I care more about high-performance allocators that has persistent memory support
 
 Enough research shows half of my performance issues comes from persistent allocators,
 and I'm looking forward to see anyone (if not me) has new insights on improving allocators.  
+
+
+{{ template "_internal/disqus.html" . }}
