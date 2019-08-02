@@ -1,7 +1,7 @@
 ---
 title: "16 Byte Pointer Is Evil"
 date: 2019-08-01T20:20:02-07:00
-draft: true
+draft: false 
 ---
 
 You've probably never heard of 16-byte pointers, but that's what happening in persistent memory programming model, and especially you, [PMDK](http://pmem.io/pmdk/).
