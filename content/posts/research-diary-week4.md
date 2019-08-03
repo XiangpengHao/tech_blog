@@ -4,6 +4,19 @@ date: 2019-07-22T12:08:58-07:00
 draft: false 
 ---
 
+### August 2nd
+
+Chengdu Hunters just secured there first lose in the Season 4 Overwatch League!
+
+Nothing special today, reading some paper/topics.
+
+"Branch prediction is not a solved problem" by Intel.
+
+"Meltdown and Spectre"
+
+That's it. Going to implement mimalloc numa-aware support.
+
+
 ### July 30th
 
 Checkout new post on huge pages https://blog.haoxp.xyz/posts/characteristics-of-hugepages/
