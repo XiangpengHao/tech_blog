@@ -4,6 +4,15 @@ date: 2019-07-22T12:08:58-07:00
 draft: false 
 ---
 
+### August 4th
+
+Just finished my numa allocator implementation.
+
+To the best of my knowledge, this mimalloc-based numa allocator is the first and best numa-aware allocator.
+
+I'll release some of my slides after I present the basic idea to Tianzheng and Kevel. 
+
+
 ### August 2nd
 
 Chengdu Hunters just secured there first lose in the Season 4 Overwatch League!
