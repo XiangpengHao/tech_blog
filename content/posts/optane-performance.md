@@ -1,7 +1,7 @@
 ---
 title: "How fast is Intel DC Persistent Memory Module?"
 date: 2019-08-14T15:29:21-07:00
-draft: true
+draft: false 
 ---
 
 
