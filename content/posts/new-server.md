@@ -10,7 +10,7 @@ Our new server (left bottom) just arrived today.
 
 ### Fun facts
 
-1. It has ten hard drive slots, but we used only one, a single 240 GiB SATA intel SSD.
+1. It has ten hard drive slots, but only one slot is used, installed a single 240 GiB SATA intel SSD.
 
 2. It has 1.408 TiB memory (12x32 GiB DRAM + 8x128 GiB Optane), and we plan to reach 1.92 TiB memory (12x32 GiB DRAM + 12x128 GiB Optane) next month.
 

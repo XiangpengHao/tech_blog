@@ -2,12 +2,14 @@ baseURL = "/"
 languageCode = "en-us"
 title = "Xiangpeng Hao"
 theme = "kiss"
-copyright = "&copy; <a href=\"https://github.com/HaoPatrick\">Xiangpeng Hao</a> 2019"
+copyright = "&copy; <a href=\"https://www.haoxp.xyz\">Xiangpeng Hao</a> 2019"
 googleAnalytics = "UA-66103952-7"
+
 [params.social]
 ahome = "www.haoxp.xyz"
 github = "HaoPatrick"
 linkedin = "hao-xiangpeng"
+telegram = "t.me/newsathlh"
 
 [params.info]
 adsense = "" # Adsense ID (ID only, without ca-pub-)
