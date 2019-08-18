@@ -41,6 +41,9 @@ Intel took more than five years to propose three different instructions, and yet
 
 My first test was simply to issue these instructions and compare the time of memory access. All the experiments are performed under `performance mode`, `O3` and with all hardware prefetchers disabled. 
 
+Code to reproduce my results: 
+https://gist.github.com/XiangpengHao/ddd63d6f6dc60d701583aae4c838787f
+
 ![](/img/clwb-clflush.png)
 
 1. There's no significant difference between `clwb`, `clflushopt`, `clflush`, and they all slower than reading from cache.
