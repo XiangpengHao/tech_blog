@@ -4,6 +4,9 @@ date: 2019-08-26T15:41:57-07:00
 draft: false 
 ---
 
+Update:
+Fix incorrect legend, thanks Baotong! 
+
 I have some stereotypes on different allocators, for example, `jemalloc` is the best allocator, `glibc malloc` doesn't scale, `pmdk allocator` is slow and don't scale. 
 But I don't have any results to vindicate my impressions. 
 
