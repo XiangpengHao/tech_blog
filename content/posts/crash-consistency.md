@@ -8,7 +8,7 @@ And converting a concurrent-consistent data structure to a crash-consistent one 
 This is a paper review of RECIPE[^1].
 
 Update 10-29: 
-the limitation section in their [repo](https://github.com/utsaslab/RECIPE#limitations), these things are not mentioned in the paper.
+There's a limitation section in their [repo](https://github.com/utsaslab/RECIPE#limitations), but these things are not mentioned in the paper.
 
 ### RECIPE assumes:
 
