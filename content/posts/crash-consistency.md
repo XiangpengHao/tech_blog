@@ -80,6 +80,9 @@ Nevertheless, I'm glad to see someone materialized the intuition:
 
 It's just not that simple. 
 
+I'm also afraid the performance numbers reported in their paper will set an unrealistic bar for future research, 
+and discourage those well rounded practical systems, especially when the paper is published in SOSP.
+
 
 [^1]: RECIPE : Converting Concurrent DRAM Indexes to Persistent-Memory Indexes
 [^2]: [Data Concurrency and Consistency](https://docs.oracle.com/cd/B28359_01/server.111/b28318/consist.htm#CNCPT020)
