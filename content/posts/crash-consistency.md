@@ -63,7 +63,7 @@ and all serious database systems[^3] requires at least `read committed`, one lay
 
 The biggest issue, however, is not to have a `read uncommitted` data structure, 
 but to **downgrade** the isolation level when performing the conversion,
-while all the original data structures mentioned in their paper promise at least `read committed`. 
+that is, all the data structures before conversion promise at least `read committed`. 
 
 Again, by not staying at the same isolation level, RECIPE has huge advantages over its competitors.
 
