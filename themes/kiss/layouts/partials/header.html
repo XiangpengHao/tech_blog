@@ -8,6 +8,9 @@
     {{ else }}
     <title>{{ .Site.Params.Info.homeTitle }}</title>
     {{ end }} {{ if .Site.Params.Info.enableSocial }} {{- partial "social/opengraph" . -}} {{ end }}
+    {{ range .AlternativeOutputFormats -}}
+    {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+    {{ end -}}
     <link rel="stylesheet" href="{{ .Site.BaseURL }}css/style.css" />
     <link rel="shortcut icon" href="favicon.png" /> {{- range .Site.Params.Assets.customCSS -}}
     <link rel='stylesheet' href='{{ . | relURL }}'> {{- end -}}
