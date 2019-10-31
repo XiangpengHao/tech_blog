@@ -6,6 +6,7 @@ copyright = "&copy; <a href=\"https://www.haoxp.xyz\">Xiangpeng Hao</a> 2019"
 googleAnalytics = "UA-66103952-7"
 
 [params.social]
+rss = "blog.haoxp.xyz/index.xml"
 ahome = "www.haoxp.xyz"
 github = "XiangpengHao"
 linkedin = "hao-xiangpeng"
