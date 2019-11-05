@@ -1,11 +1,16 @@
 ---
 title: "Is CLWB really implemented?"
-date: 2019-08-17T18:16:45-07:00
+date: 2019-11-04T14:16:45-07:00
 draft: false 
 ---
 
-No. `clwb` is just an alias of `clflushopt` on `Cascadelake`.  
+Update 11-04-2019: 
+clwb will evict the cache line even if it's **NOT** dirty.
 
+<hr>
+
+
+No. `clwb` is just an alias of `clflushopt` on `Cascadelake`.  
 
 ### What is clwb, clflushopt, clflush?
 
