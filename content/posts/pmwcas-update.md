@@ -40,23 +40,23 @@ There're two main changes that impact the performance:
 
 ![](/img/pmwcas.png)
 
-I also tried to set a CI to track the performance change by commit history, but failed because it's a premium feature of Azure Pipeline. 
+I also tried to set a CI to track the performance change by commit history but failed because it's a premium feature of Azure Pipeline. 
 
-(One of my dream is that every research project should have a CI, to track the { build | test | benchmark },
-and automatically plot the performance change over the time.
-It not only helps the academia to deliver honest and reproducible results, but also help the researchers to locate the problems.)
+(One of my dreams is that every research project should have a CI, to track the { build | test | benchmark },
+and automatically plot the performance change over time.
+It not only helps the academia to deliver honest and reproducible results but also help the researchers to locate the problems.)
 
 
 ### Motivation
 
-I'm working on improving PMwCAS not just to make my life busier, but want to use PMwCAS to **build things that matters**. 
+I'm working on improving PMwCAS not just to make my life busier but want to use PMwCAS to **build things that matter**. 
 
-I started to thinking about persistent memory about one year ago, and witnessed lots of encouraging and frustrating moments in this area.
-There're definitely not enough research efforts in making robust and efficient crash-consistent applications, 
+I started thinking about persistent memory about one year ago and witnessed lots of encouraging and frustrating moments in this area.
+There are definitely not enough research efforts in making robust and efficient crash-consistent applications, 
 and all existing frameworks are either working on inappropriate abstractions or making wrong assumptions. 
 
 Thus I started the [VeryPM](https://github.com/XiangpengHao/VeryPM) project to build the whole persistent memory software (and eventually hardware) infrastructure from scratch.
 
-The PMwCAS will be one of the most important building blocks in the VeryPM, thus it needs to be correct and efficient.
+The PMwCAS will be one of the essential building blocks in the VeryPM; it thus needs to be correct and efficient.
 
 
