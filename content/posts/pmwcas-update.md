@@ -1,5 +1,5 @@
 ---
-title: "Recent update on PMwCAS"
+title: "Recent updates on PMwCAS"
 date: 2019-11-20T18:00:21-08:00
 draft: false 
 ---
@@ -7,6 +7,7 @@ draft: false
 I've been working on PMwCAS for a few days, here are the recent updates, todo list, as well as my motivations.
 
 For those who are not familiar with PMwCAS:
+
 >PMwCAS is a library that allows atomically changing multiple 8-byte words on non-volatile memory in a lock-free manner. It allows developers to easily build lock-free data structures for non-volatile memory and requires no custom recovery logic from the application.
 
 For more details, please check out Microsoft's GitHub [repo](https://github.com/microsoft/pmwcas), and [my fork](https://github.com/XiangpengHao/pmwcas).
@@ -56,6 +57,7 @@ There are definitely not enough research efforts in making robust and efficient 
 and all existing frameworks are either working on inappropriate abstractions or making wrong assumptions. 
 
 Thus I started the [VeryPM](https://github.com/XiangpengHao/VeryPM) project to build the whole persistent memory software (and eventually hardware) infrastructure from scratch.
+(VeryPM is currently a part-time research project, I would be extremely happy if I have the opportunities to realize it during my Ph.D. life.)
 
 The PMwCAS will be one of the essential building blocks in the VeryPM; it thus needs to be correct and efficient.
 
