@@ -1,7 +1,7 @@
 ---
 title: "Recent updates on PMwCAS"
 date: 2019-11-20T18:00:21-08:00
-draft: true 
+draft: false 
 ---
 
 I've been working on PMwCAS for a few days, here are the recent updates, todo list, as well as my motivations.
@@ -33,11 +33,19 @@ There're two main changes that impact the performance:
 
 - Removed the unnecessary address flushes after installing the descriptors. (Let me know if I'm not correct!) During recovery, the library can identify the in-progress descriptors by looking for **dirty undecided status**.
 
-|                     | update count | success count |
+
+Benchmark details:
+
+- Eight threads running for 30 seconds, other parameters are kept default.
+- Compiled by **clang++**, with all optimization enabled.
+- NUMA bind, of course.
+
+
+|                      | update count/s | success count/s |
 |----------------------|--------------|---------------|
-| original             | 675718    | 487226     |
-| remove thread help   | +153636    | +92021      |
-| remove extra persist | +231084    | +140386     |
+| original             | 711371    | 512794        |
+| remove thread help   | 873892    | 609362     |
+| remove extra persist | 1131266   | 762112     |
 
 ![](/img/pmwcas.png)
 
