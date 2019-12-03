@@ -1,8 +1,10 @@
 ---
-title: "Recent updates on PMwCAS"
+title: "Recent updates to PMwCAS"
 date: 2019-12-02T18:00:21-08:00
 draft: false 
 ---
+
+Update 12-03: Add group persist data
 
 Update 12-02: Add more performance data
 
@@ -16,7 +18,7 @@ For more details, please check out Microsoft's GitHub [repo](https://github.com/
 
 I like the library for two reasons: 1) it provides useful building primitives for crash-consistent and multi-thread applications, 2) it is correct, it guarantees read-committed. (I'm not kidding, but most persistent memory research papers and data structures are just WRONG in terms of crash-consistency)
 
-Some recent updates on the PMwCAS library:
+Some recent updates to the PMwCAS library:
 
 - Fixed a non-linearity bug in multi-word cas algorithm. (Detected by another research group in Canada)
 
@@ -36,6 +38,8 @@ There're two main changes that impact the performance:
 - Removed the unnecessary address flushes after installing the descriptors. (Let me know if I'm not correct!) During recovery, the library can identify the in-progress descriptors by looking for **dirty undecided status**.
 - Add more aggressive paddings when running on persistent memory.
 
+- Group flushes (`clwb`)
+
 
 Benchmark details:
 
@@ -50,10 +54,11 @@ Benchmark details:
 | remove thread help   | 873892    | 609362     |
 | remove extra persist | 1131266   | 762112     |
 | add more padding     | 1450235   | 912708     |
+| group persist        | 1650137   | 1011900    |
 
 ![](/img/pmwcas.png)
 
-I also tried to set a CI to track the performance change by commit history but failed because it's a premium feature of Azure Pipeline. 
+I also set up a [continuos benchmark](https://xiangpenghao.github.io/pmwcas/) to track the performance change by commit history. 
 
 (One of my dreams is that every research project should have a CI, to track the { build | test | benchmark },
 and automatically plot the performance change over time.
