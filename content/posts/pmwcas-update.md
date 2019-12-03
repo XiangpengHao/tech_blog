@@ -1,8 +1,10 @@
 ---
 title: "Recent updates on PMwCAS"
-date: 2019-11-20T18:00:21-08:00
+date: 2019-12-02T18:00:21-08:00
 draft: false 
 ---
+
+Update 12-02: Add more performance data
 
 I've been working on PMwCAS for a few days, here are the recent updates, todo list, as well as my motivations.
 
@@ -22,7 +24,7 @@ Some recent updates on the PMwCAS library:
 
 - Added a CI to automatic track the building and testing, several bugs are also fixed along with this process.
 
-- Improved the performance by up to 50%.
+- Improved the performance by up to 100%.
 
 
 ### On improving the performance of PMwCAS
@@ -32,6 +34,7 @@ There're two main changes that impact the performance:
 - Disallowed working threads to help each other. For any thread encountering a in-progress operations, it should keep retrying rather than helping the other thread.
 
 - Removed the unnecessary address flushes after installing the descriptors. (Let me know if I'm not correct!) During recovery, the library can identify the in-progress descriptors by looking for **dirty undecided status**.
+- Add more aggressive paddings when running on persistent memory.
 
 
 Benchmark details:
@@ -46,6 +49,7 @@ Benchmark details:
 | original             | 711371    | 512794        |
 | remove thread help   | 873892    | 609362     |
 | remove extra persist | 1131266   | 762112     |
+| add more padding     | 1450235   | 912708     |
 
 ![](/img/pmwcas.png)
 
