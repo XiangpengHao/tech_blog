@@ -1,7 +1,7 @@
 ---
 title: "My Privacy Preserved Smart Home"
 date: 2019-12-15T22:48:32-08:00
-draft: true
+draft: false 
 ---
 
 I've been looking for an ultimate smart home solution for a while, yet none of them fit my needs.
