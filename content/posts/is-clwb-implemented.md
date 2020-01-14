@@ -1,5 +1,5 @@
 ---
-title: "Is CLWB really implemented?"
+title: "Is CLWB actually implemented?"
 date: 2019-11-04T14:16:45-07:00
 draft: false 
 ---
