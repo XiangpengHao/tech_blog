@@ -21,25 +21,6 @@ In contrast to the first paper where the authors try to use FPGAs on data-intens
 in the second paper the authors uses FPGAs to address computation-intensive problems.
 Combining these two paper is more interesting than looking them separately.
 
-### Lowering the Latency of Data Processing Pipelines Through FPGA based Hardware Acceleration
-The authors try to replace a CPU-based machine learning model to a FGPA-based model.
-The machine learning inference is known to be floating-number intensive and is largely limited by the CPU clock frequency.
-A FPGA chip can definitely help under such workload, not only does it have better throughput, but also be an order of more power efficient.
-
-The cost of FPGA in terms of throughput, however, is data movement (which is exactly the second paper trying to address).
-Data interaction between the PCIe (and even the network) can be costly compared to that with the main memory.
-Given what we have discussed, the workload need to be sufficiently heavy in order to accommodate the data movement cost.
-Machine learning inferences is a good fit, while other workloads (e.g. graph processing or single index query) might not be.
-
-The majority parts of the paper is boring because it looks like just a new system that utilized the FPGA, but there are several sparkling points:
-
-1. Why not GPUs? When talking about accelerator, the GPUs are probably the most widely researched and deployed ones.
-This paper has a tiny section that answers this question, and there's a particularly important sentence: "we are not aware of any significance on inference over decision tree ensembles on GPUs due to the irregular nature of the computations." 
-The answer is simple: GPU is good at handling regular data while that particular machine learning model happens to be dominated by irregular memory access.
-2. What are the data movement cost? The authors installed the FPGAs on PCIe channels and fast network.
-The evaluations (Figure 9.c) shows the CPU-FPGA bandwidth indeed limits the scalability of the whole system.
-Nevertheless, the benefits of FPGS acceleration is so significant that the data movement in the target scenario is negligible.
-
 
 ### Caribou: Intelligent Distributed Storage
 
@@ -61,5 +42,25 @@ The concept of near-data processing comes from FPGA processing on the embedded D
 
 (more on the presentation)
 
+
+
+### Lowering the Latency of Data Processing Pipelines Through FPGA based Hardware Acceleration
+The authors try to replace a CPU-based machine learning model to a FGPA-based model.
+The machine learning inference is known to be floating-number intensive and is largely limited by the CPU clock frequency.
+A FPGA chip can definitely help under such workload, not only does it have better throughput, but also be an order of more power efficient.
+
+The cost of FPGA in terms of throughput, however, is data movement (which is exactly the second paper trying to address).
+Data interaction between the PCIe (and even the network) can be costly compared to that with the main memory.
+Given what we have discussed, the workload need to be sufficiently heavy in order to accommodate the data movement cost.
+Machine learning inferences is a good fit, while other workloads (e.g. graph processing or single index query) might not be.
+
+The majority parts of the paper is boring because it looks like just a new system that utilized the FPGA, but there are several sparkling points:
+
+1. Why not GPUs? When talking about accelerator, the GPUs are probably the most widely researched and deployed ones.
+This paper has a tiny section that answers this question, and there's a particularly important sentence: "we are not aware of any significance on inference over decision tree ensembles on GPUs due to the irregular nature of the computations." 
+The answer is simple: GPU is good at handling regular data while that particular machine learning model happens to be dominated by irregular memory access.
+2. What are the data movement cost? The authors installed the FPGAs on PCIe channels and fast network.
+The evaluations (Figure 9.c) shows the CPU-FPGA bandwidth indeed limits the scalability of the whole system.
+Nevertheless, the benefits of FPGS acceleration is so significant that the data movement in the target scenario is negligible.
 
 
