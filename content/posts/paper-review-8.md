@@ -1,7 +1,7 @@
 ---
 title: "Paper Review: DB on NIC"
 date: 2020-03-16T16:21:05-07:00
-draft: true
+draft: false 
 ---
 
 This week's topic is very like the "DB on new hardwares," the difference is NIC has gained some special interests.
