@@ -1,8 +1,26 @@
 ---
 title: "Scientific writing cheat sheet"
-date: 2020-03-22T16:09:21-07:00
+date: 2020-03-26T16:09:21-07:00
 draft: false 
 ---
+<style>
+.do {
+    padding: 1em;
+    border-left: 3px solid #c0caad;
+    background: #f5f7fa;
+    margin-bottom: 1em;
+}
+.dono{
+    padding: 1em;
+    border-left: 3px solid #aa4465;
+    background: #f5f7fa;
+    margin-bottom: 1em;
+}
+b {
+    font-weight: 500;
+}
+</style>
+
 
 Scientific writing can be tough, but we can improve it with some tricks and principles.
 Here is a list of writing tips from the course **[Writing in the Sciences](https://www.coursera.org/learn/sciwrite/home/welcome)**.
@@ -10,29 +28,34 @@ Here is a list of writing tips from the course **[Writing in the Sciences](https
 I'll keep adding new tips as I go through the course.
 
 #### Do not convert verbs to nouns.
-> These findings imply that the rates of ascorbate radical **production** and its **recycling** via dehydroascorbate reductase to replenish the ascorbate pool are equivalent at the lower irradiance, 
-but not equivalent at higher irradiance with the rate of ascorbate radical **production** exceeding its **recycling** back to ascorbate.
+<div class="dono"> These findings imply that the rates of ascorbate radical <b>production</b> and its <b>recycling</b> via dehydroascorbate reductase to replenish the ascorbate pool are equivalent at the lower irradiance, 
+but not equivalent at higher irradiance with the rate of ascorbate radical <b>production</b> exceeding its <b>recycling</b> back to ascorbate.</div>
 
-> These findings imply that, at low irradiation, ascorbate radicals are **produced** and **recycled** at the same rate,
-but at high irradiation, they are **produced** faster than they can be **recycled** back to ascorbate.
+<div class="do">These findings imply that, at low irradiation, ascorbate radicals are <b>produced</b> and <b>recycled</b> at the same rate,
+but at high irradiation, they are <b>produced</b> faster than they can be <b>recycled</b> back to ascorbate.
+</div>
 
 #### Don't bury the main verb
-> One study of 930 adults with multiple sclerosis receiving care in one of two managed care settings or in a fee-for-service setting **found** that
+<div class="dono">One study of 930 adults with multiple sclerosis receiving care in one of two managed care settings or in a fee-for-service setting <b>found</b> that
 only two-thirds of those needing to contact a neurologist for an MS-related problem in the prior 6 months had done so.
+</div>
 
-> **One study found that**, of 930 adults with multiple sclerosis who were receiving care in one of two managed care settings or in a fee-for-service setting, 
+<div class="do"><b>One study found that</b>, of 930 adults with multiple sclerosis who were receiving care in one of two managed care settings or in a fee-for-service setting, 
 only two-thirds of needing to contact a neurologist ... had done so.
+</div>
 
 #### Cut unnecessary words 
-> This paper **provides a review of** the basic tenets of cancer biology study design,
-using as examples studies that illustrate the methodologic challenges or **that demonstrate successful solutions to the difficulties inherent in biological research**. 
+<div class="dono">This paper <b>provides a review of</b> the basic tenets of cancer biology study design,
+using as examples studies that illustrate the methodologic challenges or <b>that demonstrate successful solutions to the difficulties inherent in biological research</b>. 
+</div>
 
-> This paper **reviews** cancer biology study design, using examples that illustrate specific challenges and **solutions**.
+<div class="do">This paper <b>reviews</b> cancer biology study design, using examples that illustrate specific challenges and <b>solutions</b>.
+</div>
 
 #### Eliminate negatives
-> They **did not believe** the drug was harmful.
+<div class="dono">They <b>did not believe</b> the drug was harmful.</div>
 
-> They believe the drug was safe.
+<div class="do">They believe the drug was safe.</div>
 
 - Not honest - dishonest
 - Not harmful - safe
@@ -40,16 +63,43 @@ using as examples studies that illustrate the methodologic challenges or **that 
 - Did not pay attention to - ignored
 
 #### Eliminate there are/there is
-> **There are** many ways in which we can arrange the pulleys.
+<div class="dono"> <b>There are</b> many ways in which we can arrange the pulleys.</div>
 
-> We can arrange the pulleys in many ways.
+<div class="do">We can arrange the pulleys in many ways.</div>
 
 
 #### Use active voice
-> A. The activation of Ca++ channel **is induced by** the depletion of endoplasmic reticulum Ca++ stores.
+<div class="dono">The activation of Ca++ channel <b>is induced by</b> the depletion of endoplasmic reticulum Ca++ stores.</div>
 
-> A. Depleting Ca++ from the endoplasmic reticulum activates Ca++ channels.
+<div class="do">Depleting Ca++ from the endoplasmic reticulum activates Ca++ channels.</div>
 
-> B. Major differences in the reaction times of the two study subjects **were found**.
+<div class="dono">Major differences in the reaction times of the two study subjects <b>were found</b>.</div>
 
-> B. Two study subjects differed in reaction times.
+<div class="do">Two study subjects differed in reaction times.</div>
+
+
+#### Colon, semicolon and dash
+**Colon**
+<div class="dono">Many types of cells and tissues develop a kind of directionality.
+Certain events happen toward one end of the cell or tissue or the other.
+It's a phenomenon called cell polarity.</div>
+
+<div class="do"> Many cells and tissues develop a kind of directionality called cell polarity<b>: certain events happen toward one end of the cell or tissue.</b></div>
+
+**Semicolon**
+
+Semicolon connects two independent clauses. 
+A clause always contains a subject and predicate; an independent clause can stand alone as a complete sentence.
+<div class="do">
+It happened because people organized and voted for better prospects; 
+because leader enacted smart, forward-looking policies; 
+because people's perspectives opened up, and with them, societies did too.
+</div>
+
+**Dash**
+
+Use the dash to add emphasis or to insert an abrupt definition or description almost anywhere in the sentence.
+<div class="do">
+The drugs did more than prevent new fat accumulation.
+They also triggered overweight mice to shed significant amounts of fat <b>-- up to half their body weight</b>.
+</div>
