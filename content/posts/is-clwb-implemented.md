@@ -70,7 +70,6 @@ To confirm this, my second test used `perf` to directly count the cache misses.
 | With `clflushopt`| 687,392 | 736,697 |
 | With `clflush`| 688,151 | 736,890 |
 
-
-Looks like `clwb` is just an alias of `clflushopt`, shame on Intel!
-
+`clwb` and `clflushopt` have similar cache reference and cache miss --
+`clwb` is just an alias of `clflushopt`, shame on Intel!
 
