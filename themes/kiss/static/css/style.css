@@ -294,7 +294,7 @@ code,
 pre {
   -moz-osx-font-smoothing: auto;
   -webkit-font-smoothing: auto;
-  font-family: "Source Code Pro", Monaco, Inconsolata, monospace;
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
   line-height: 1.25;
 }
 body {
@@ -5676,9 +5676,7 @@ code {
   font-size: 90%;
   padding: 2px 4px;
   margin: 0 2px;
-  border: 1px solid #ddd;
   background-color: #f8f8f8;
-  color: #42464c;
 }
 .content pre code {
   font-size: 90%;
