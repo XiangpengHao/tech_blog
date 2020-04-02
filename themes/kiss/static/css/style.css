@@ -157,8 +157,7 @@ td img {
 }
 pre,
 pre code {
-  background-color: #f5f7fa;
-  color: #42464c;
+  background-color: rgba(27,31,35,.05);
 }
 *,
 :after,
@@ -304,7 +303,7 @@ body {
   line-height: 1.428571428571429;
 }
 code {
-  padding: 1px 2px 2px;
+  padding: .2em .4em;
 }
 .button,
 .input,
@@ -5678,7 +5677,6 @@ code {
   padding: 2px 4px;
   margin: 0 2px;
   border: 1px solid #ddd;
-  border-radius: 4px;
   background-color: #f8f8f8;
   color: #42464c;
 }
