@@ -4,6 +4,8 @@ title = "Xiangpeng Hao"
 theme = "kiss"
 copyright = "<a href=\"https://www.haoxp.xyz\">Xiangpeng Hao</a> 2020"
 googleAnalytics = "UA-66103952-7"
+pygmentsCodeFences = true
+pygmentsStyle = "xcode" 
 
 [params.social]
 rss = "blog.haoxp.xyz/index.xml"
@@ -18,3 +20,4 @@ enableSocial = true # Adds OpenGraph and Twitter cards
 homeTitle = "Blog - Xiangpeng Hao" # Title for home page
 poweredby = false # Adds powered by hugo and kiss below Copyright
 related = false # Includes related articles at the bottom of the article
+
