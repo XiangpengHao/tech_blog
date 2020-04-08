@@ -1,5 +1,5 @@
 ---
-title: "The case of async memory access in data intensive systems"
+title: "A view of async memory access in rust"
 date: 2020-04-01T14:51:35-07:00
 draft: true 
 ---
@@ -87,8 +87,8 @@ impl Cell {
 ```
 
 Linked list nodes are often allocated from the heap, but we instead use an large `Cell` array to suppress the issues from the allocator. 
-We then initialize the array to a linked list by insert random shuffled values.
-![](/img/async-workload.png)
+We then initialize the array to a linked list by inserting random shuffled values.
+![](/async/async-workload.png)
 
 ```rust
 pub struct ArrayList {
@@ -209,6 +209,90 @@ impl<'a> AsyncTraversal<'a> {
 {{< / highlight >}}
 
 ### Scheduler (executor)
+The scheduler is the most interesting part.
+Unlike most other programming languages, where the language committee specifies an official runtime 
+and the programmers have no ways to change it.
+The Rust decouples the async state machines with the schedulers, and allows programmers to chose whichever executors that fits best in their use case.
+This flexibility is extremely important to us, as we want to build our own lightweight executor that is tailored for the async memory access.
+
+The executor design is simple: it has four tasks slots, the execution cursor rotates around these tasks until all the tasks conclude.
+![](/async/async-executor.png)
+
+```rust
+pub struct Executor<'a> {
+    task_queue: [Option<Task<'a>>; EXECUTOR_QUEUE_SIZE],
+}
+
+impl<'a> Executor<'a> {
+    pub fn spawn(&mut self, task: Task<'a>) {
+        for i in 0..EXECUTOR_QUEUE_SIZE {
+            if self.task_queue[i].is_none() {
+                self.task_queue[i] = Some(task);
+                return;
+            }
+        }
+        panic!("max executor queue reached!");
+    }
+}
+```
+
+The executor will `poll` the tasks and check if they are ready to continue,
+we thus need to design a special task for async memory access.
+The idea is simple: return `ready` after a small period.
+Constructing a timer can be costly, we instead use a heuristic based approach:
+only when the executor asked us for a second time, we return `ready`, otherwise return `pending`.
+In rust code, this is as simple as:
+
+```rust
+pub struct MemoryAccessFuture {
+    is_first_poll: bool,
+}
+
+impl Future for MemoryAccessFuture {
+    fn poll(mut self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Self::Output> {
+        if self.is_first_poll {
+            self.is_first_poll = false;
+            Poll::Pending
+        } else {
+            Poll::Ready(())
+        }
+    }
+}
+```
+
+### The Rust lang
+So far we have covered all the essential code to implement an feature complete async memory access benchmark.
+Obviously I omitted quite a lot technical details and some engineering tricks, 
+the full code is available at the [GitHub repo](https://github.com/XiangpengHao/async_bench).
+
+Before we continue to the experiments and benchmark section, I would like to share some thoughts on the rust language.
+
+From my perspective, rust is better than c++ in almost every aspects.
+System programming is difficult, it often needs to deal with the most challenging and error prone problems,
+such as concurrency and crash consistency.
+C++ is not only bad at handling these issues, but also deceptively easy to write incorrect code.
+It feels like this language is encouraging you to make the complex problem even more chaotic.
+Coding in rust feels the opposite way. 
+The compiler forces you to think thoroughly before making any decisions:
+you need to carefully think about heap allocation, nullable, lifetime and concurrency.  
+
+
+## Section 4: Benchmark
+The following figure shows the performance of async vs sync.
+We can see the async version is about 4x faster than the sync version -- remember our queue size is exactly four.
+This indicates that the majority of the synchronous time is wasted on the memory stall, 
+which is the main selling point of async memory access.
+![](/async/perf1.png)
+
+Switching tasks, however, comes with costs, especially when the memory is already in the cache.
+As shown in the following figure, where the array size is relatively small and all the workloads can fit into the CPU cache.
+In this case, async memory access is a lot slower than the sequential access. 
+![](/async/perf2.png)
+
+
+## Section 5: Discussion
+TBD
+
 
 
 [^1]: Exploiting Coroutines to Attack the “Killer Nanoseconds”
