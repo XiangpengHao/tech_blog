@@ -1,7 +1,7 @@
 ---
 title: "A view of async memory access in rust"
 date: 2020-04-01T14:51:35-07:00
-draft: true 
+draft: false 
 ---
 
 ## Section 1: Background
@@ -289,9 +289,54 @@ As shown in the following figure, where the array size is relatively small and a
 In this case, async memory access is a lot slower than the sequential access. 
 ![](/async/perf2.png)
 
+I omitted a lot of detailed benchmark as most of them are boring.
+But here are some takeaway messages:
+(1) spawning four tasks generally takes only 200ns, i.e. same as a persistent memory access.
+(2) switching from one task to the other takes about 30ns, which is one third time of a DRAM cache miss.
+(3) the overhead depends on the executor implementation and of course the cache fetch heuristic.
+
 
 ## Section 5: Discussion
-TBD
+In this section, we try to answer this question: how can we use async memory access to accelerate my application.
+
+**The iron curtain between synchronous world and asynchronous world.**
+Although async programming achieved far better programmability than the batch/group processing,
+the line between async and sync is still clear and unbreakable.
+One single job can not benefit from async execution, in fact it will strictly slow down each individual task,
+because task switching is pure overhead. 
+Only when we measure the performance of a whole system, e.g. the throughput of a web server, 
+can we see the performance improvements.
+
+The question is that what if we want to accelerate a small component of a big synchronous system? 
+This question is equivalent to "how to accelerate the component using multi-threading?"
+One can argue that coroutine is much more efficient and can have a lot more opportunities,
+but the core problem here is **task partition**.
+We don't really have enough problems that have the natural parallel construction like our mini benchmark.
+In a lot more practical cases, the problem we are facing is how to accelerate a single linked list traversal,
+where memory prefetch doesn't work and every memory access has chained dependency.
+
+Before we get too pessimistic about coroutine, I would argue that at least coroutine is one small step further towards
+**fine grained partition**.
+It enables a new possible scenario: a single thread task trying to scan over an unsorted array of 100 elements. 
+Spawning four threads must be too costly to cover the context switch cost, while spawning four coroutine can be definitely worth trying.
+
+A possible concern is that **how can the programmer tell these 100 elements are not in the cache?**
+Programmers need to guess. 
+This solution is a double-edged sword: on the one hand, incorporate high level semantics to guess cache miss can achieve high accuracy; 
+on the other hand, it also means there's no transparent solution for async memory access. 
+This is the sword of damocles of async memory access, until we have some way from the hardware to tell a cache miss.
+
+Some may argue that if we build a new parallel system (e.g. a web server) from scratch -- targeted async runtime on the day one -- we no longer need to worry about task partition.
+This indeed is a reasonable use case, but we can still encounter some problems.
+A general purpose scheduler might significantly differ from a dedicated async memory access scheduler.
+It's way more complex and thus has way higher context switch cost.
+We can not mix these schedulers and we can not afford the overhead.
+
+My last paragraph will discuss one unexpected benefit of async memory access: concurrent without concurrency control.
+There will be only one task running at any time, futhermore, tasks has its full control on when to hand back the execution.
+This means that a running coroutine task is similar to a running thread with OS interrupt disabled: 
+no any other task (thread) can touch its data.
+How this property can simplify the programming model is not well understood, but it definitely shows big potentials.
 
 
 
