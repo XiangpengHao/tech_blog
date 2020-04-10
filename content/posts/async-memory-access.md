@@ -1,6 +1,6 @@
 ---
 title: "A view of async memory access in rust"
-date: 2020-04-01T14:51:35-07:00
+date: 2020-04-07T14:51:35-07:00
 draft: false 
 ---
 
@@ -297,7 +297,7 @@ But here are some takeaway messages:
 
 
 ## Section 5: Discussion
-In this section, we try to answer this question: how can we use async memory access to accelerate my application.
+In this section, I try to answer this question: how can we use async memory access to accelerate my application.
 
 **The iron curtain between synchronous world and asynchronous world.**
 Although async programming achieved far better programmability than the batch/group processing,
@@ -324,7 +324,7 @@ A possible concern is that **how can the programmer tell these 100 elements are 
 Programmers need to guess. 
 This solution is a double-edged sword: on the one hand, incorporate high level semantics to guess cache miss can achieve high accuracy; 
 on the other hand, it also means there's no transparent solution for async memory access. 
-This is the sword of damocles of async memory access, until we have some way from the hardware to tell a cache miss.
+This is the sword of damocles of async memory access, until we have some way from the hardware to predict a cache miss.
 
 Some may argue that if we build a new parallel system (e.g. a web server) from scratch -- targeted async runtime on the day one -- we no longer need to worry about task partition.
 This indeed is a reasonable use case, but we can still encounter some problems.
