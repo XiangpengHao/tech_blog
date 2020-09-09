@@ -1,7 +1,7 @@
 ---
 title: "Install Perf on WSL2 (with unwind and symbols)"
 date: 2020-09-09T12:39:03+08:00
-draft: true
+draft: false 
 ---
 
 WSL2 don't have `perf` and we can't install it from Ubuntu apt because WSL2 has its own modified linux kernel (and perf requires a match with the kernel version).
