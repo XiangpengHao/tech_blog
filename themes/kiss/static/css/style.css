@@ -294,7 +294,7 @@ code,
 pre {
   -moz-osx-font-smoothing: auto;
   -webkit-font-smoothing: auto;
-  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+  font-family: Jetbrains Mono, SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
   line-height: 1.25;
 }
 body {
@@ -5631,7 +5631,7 @@ code {
 .content h4 code,
 .content h5 code,
 .content h6 code {
-  background-color: #8a2be2;
+  background-color: inherit;
 }
 .content h1 + h2:not(:first-child),
 .content h2 + h3:not(:first-child),
@@ -5679,7 +5679,7 @@ code {
   background-color: #f8f8f8;
 }
 .content pre code {
-  font-size: 90%;
+  font-size: 100%;
   padding: 1em;
   line-height: 1.5;
 }
