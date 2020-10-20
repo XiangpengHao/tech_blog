@@ -1,6 +1,6 @@
 ---
 title: "System research frustrations"
-date: 2020-10-20T14:58:31+08:00
+date: 2020-10-19T14:58:31+08:00
 draft: false 
 ---
 
