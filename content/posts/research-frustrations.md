@@ -20,13 +20,21 @@ Many of these points are unfair to my advisors (which are very nice to students)
 Has to work on a pile of legacy code that is **not in good shape**.
 
 Not in good shape (any of the following):
+
 1. No tests
+
 2. Benchmarks as tests
+
 3. Take more than a minute to compile
+
 4. Take more than a minute to verify(guess) correctness
+
 5. Print error and runtime message to stdout or stderr or mix of them
+
 6. Compile by concatenating every source file
+
 7. Link by linking every shared library
+
 8. Dead code, unused variables, orphan functions
 
 
