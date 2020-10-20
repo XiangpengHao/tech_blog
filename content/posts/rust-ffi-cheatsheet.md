@@ -4,6 +4,9 @@ date: 2020-09-25T15:09:06+08:00
 draft: true 
 ---
 
+Working in progress...
+
+
 ### C string to Rust string and vice versa
 [source](https://stackoverflow.com/questions/24145823/how-do-i-convert-a-c-string-into-a-rust-string-and-back-via-ffi) 
 
@@ -28,7 +31,6 @@ fn main() {
 
 ### `PathBuf -> const char *path`
 
-Unix only! 
 [source](https://stackoverflow.com/questions/38948669/whats-the-most-direct-way-to-convert-a-path-to-a-c-char)
 
 ```rust
