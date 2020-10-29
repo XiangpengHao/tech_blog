@@ -16,7 +16,7 @@ These are common cases in system research, and the situation will unlikely to im
 Many of these points are unfair to my advisors (which are very nice to students) -- these things will never happen if I talk more and express more of my feelings.
 
 
-### One
+### 1
 Has to work on a pile of legacy code that is **not in good shape**.
 
 Not in good shape (any of the following):
@@ -38,44 +38,47 @@ Not in good shape (any of the following):
 8. Dead code, unused variables, orphan functions
 
 
-### Two
+### 2
 You: Want to improve the codebase.
 
 Your advisor/collaborators: Why? Do we need that? Isn't that a waste of time? Things have priorities.
 
-### Three
+### 3
 You: Re-write a single line of code so it looks cleaner.
 
 You: The benchmarks collapse because the code switched from an undefined behaviour to another undefined behaviour. 
 
-### Four
+### 4
 You: Work hard for a whole week and finally get some numbers before the regular meeting.
 
 You advisor/collaborators: I don't know how to interpret these numbers; why don't you do this and that before we have the discussion?
 
-### Five
+### 5
 You: Add an absolutely-not-used if clause
 
 Your code: Performance drops by 20%
 
-### Six 
+### 6
 You: I'm thinking big!
 
 You project: Most performance improvments come from profiling cache miss, page fault, contention and branch prediction.
 
-### Seven 
+### 7
 You: Researching is not engineering!
 
-You: Staring at [point six](#six)
+You: Staring at [point six](#6)
 
 
-### Eight 
+### 8
 Spend 10% of time prototyping, spend the rest of time debugging and profiling.
 
-### Nine 
+### 9 
 You: Work hard for five years and produce three papers that no body cares.
 
 Your friends: Work in Snowflake, Bytedance, Ant Financial, TiDB etc...
 
-### Ten
+### 10
+
+
+### 11
 Adding more...
