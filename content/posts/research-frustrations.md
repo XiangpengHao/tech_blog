@@ -78,7 +78,14 @@ You: Work hard for five years and produce three papers that no body cares.
 Your friends: Work in Snowflake, Bytedance, Ant Financial, TiDB etc...
 
 ### 10
+You: Writing in a new system programming language that every question goes to GitHub issues rather than StackOverflow
 
+Your friends: Anything Python can't do?
 
-### 11
+### 12
+You: Wait 10 min for the benchmark to load data
+
+You code: SegFault right after the benchmark starts.
+
+### 13
 Adding more...
