@@ -8,7 +8,7 @@ I use Rust in one of my research projects.
 The project was originally developed in C++, and because [C++ is bad](https://da-data.blogspot.com/2020/10/no-c-still-isnt-cutting-it.html) we decided to add new features primarily in Rust. 
 
 Calling Rust from C++ is simple and easy (thanks to the excellent [cxx](https://github.com/dtolnay/cxx) project), but we soon find some performance regressions that didn't appear in the C++ code. 
-Specifically, we see many tiny Rust functions in [flamegraph](https://github.com/flamegraph-rs/flamegraph) that wouldn't surface up in C++.
+Specifically, we see many tiny Rust functions in [flamegraph](https://github.com/flamegraph-rs/flamegraph) that wouldn't surface up if written in C++.
 The reason is that those Rust functions crossed language boundary and the optimizers have no way to optimize them.
 
 LTO (linking time optimization) can save us because during linking time optimizers can gather enough knowledge about the whole program and (presumably) can find new optimizing opportunities.   
