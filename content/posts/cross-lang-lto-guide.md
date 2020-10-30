@@ -1,7 +1,7 @@
 ---
 title: "Guide to LTO between Rust and C/C++"
 date: 2020-10-29T19:23:31+08:00
-draft: true
+draft: false
 ---
 
 I use Rust in one of my research projects.
