@@ -52,6 +52,20 @@ using as examples studies that illustrate the methodologic challenges or <b>that
 <div class="do">This paper <b>reviews</b> cancer biology study design, using examples that illustrate specific challenges and <b>solutions</b>.
 </div>
 
+<div class="dono">As it is well known, increased athletic activity has been related to a profile of lower cardiovascular risk,
+lower blood pressure levels, and improved muscular and cardio-respiratory performance.</div>
+
+<div class="do">Increased athletic activity is assoicated with lower cardivascular risk, lower blood pressure, and improved fitness</div>
+<div class="do">Increased athletic activity lowers cardivascular risk and blood pressure, and improves fitness</div>
+
+<div class="dono">The demonstration experiment is the first of its kind and is a proof of principle for the concept of laser driven 
+particle acceleration in a structure loaded vaccum</div>
+
+<div class ="do">The experiment provides a proof of principle of laser driven particle acceleration in a structure loaded vaccum.</div>
+
+<div class="dono">Brian injury incidence shows two peak peroid in almost all reports: rates are the highest in young people and the elderly</div>
+<div clas="do">Brian injury incidence peaks in the young and elderly</div>
+
 #### Eliminate negatives
 <div class="dono">They <b>did not believe</b> the drug was harmful.</div>
 
