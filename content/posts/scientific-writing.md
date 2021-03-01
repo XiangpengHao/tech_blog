@@ -66,6 +66,43 @@ particle acceleration in a structure loaded vaccum</div>
 <div class="dono">Brian injury incidence shows two peak peroid in almost all reports: rates are the highest in young people and the elderly</div>
 <div clas="do">Brian injury incidence peaks in the young and elderly</div>
 
+<div class = "dono">Anti-inflammatory drugs may be protective for the occurrence of Alzheimer’s Disease.</div>
+<div class = "do">Anti-inflammatory drugs may protect against Alzheimer's Disease.</div>
+
+<div class = "dono">Clinical seizures have been estimated to occur in 0.5% to 2.3% of the neonatal population.</div>
+<div class = "do">Clinical seizures occur in 0.5% to 2.3% of the new borns.</div>
+
+
+<div class = "dono">Ultimately p53 guards not only against malignant transformation but also plays a role in developmental processes as diverse as aging, differentiation, and fertility.  </div>
+<div class = "do">Besides preventing cancer, p53 also plays roles in aging, differentiation, and fertility</div>
+
+
+<div class = "dono">Injuries to the brain and spinal cord have long been known to be among the most devastating and expensive of all injuries to treat medically.</div>
+<div class = "do">Injuries to the brain and spinal cord are among the most devastating and expensive.</div>
+
+
+<div class = "dono">An IQ test measures an individual’s abilities to perform functions that usually fall in the domains of verbal communication, reasoning, and performance on tasks that represent motor and spatial capabilities.</div>
+<div class = "do">IO tests measure one's ability of verbal, reasoning, motor and spatial capabilities</div>
+
+
+<div class = "dono">As we can see from Figure 2, if the return kinetic energy is less than 3.2 Up, there will be two electron trajectories associated with this kinetic energy.</div>
+<div class = "do">Figure 2 shows that a return kinetic energy less than 3.2Up yeilds two electron trajectories.</div>
+
+<div class = "dono"></div>
+<div class = "do"></div>
+
+
+<div class = "dono"></div>
+<div class = "do"></div>
+
+
+
+<div class = "dono"></div>
+<div class = "do"></div>
+
+
+
+
 #### Eliminate negatives
 <div class="dono">They <b>did not believe</b> the drug was harmful.</div>
 
