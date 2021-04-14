@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  lang="en-us" >
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+    <title>Is CLWB actually implemented? | Xiangpeng Hao</title>
+     <meta property='og:title' content='Is CLWB actually implemented? - Xiangpeng Hao'>
+<meta property='og:description' content='TLDR: No. clwb is just an alias of clflushopt on Cascadelake.
+What is clwb, clflushopt, clflush? It sounds crazy, but before clflush there isn&rsquo;t a instruction on Intel x86 platform that can explicitly evict a cacheline. In other words, applications has no control of when their data should be flushed to memory.
+So Intel came up with their own solution, namely clflush (cache line flush), which flush a cache line.'>
+<meta property='og:url' content='/posts/is-clwb-implemented/'>
+<meta property='og:site_name' content='Xiangpeng Hao'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts'><meta property='article:published_time' content='2019-11-04T14:16:45-07:00'/><meta property='article:modified_time' content='2019-11-04T14:16:45-07:00'/><meta name='twitter:card' content='summary'><meta name='twitter:site' content='@'><meta name='twitter:creator' content='@'>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="shortcut icon" href="favicon.png" /></head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="/"><h1 class="title is-4">Xiangpeng Hao</h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile"><a class="level-item" href='https://haoxp.xyz' target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <g transform="scale(0.042)" stroke-width="4">
+        <path fill="currentColor"
+            d="M528 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h480c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm0 400H48V80h480v352zM208 256c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm-89.6 128h179.2c12.4 0 22.4-8.6 22.4-19.2v-19.2c0-31.8-30.1-57.6-67.2-57.6-10.8 0-18.7 8-44.8 8-26.9 0-33.4-8-44.8-8-37.1 0-67.2 25.8-67.2 57.6v19.2c0 10.6 10 19.2 22.4 19.2zM360 320h112c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8H360c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8zm0-64h112c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8H360c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8zm0-64h112c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8H360c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8z">
+        </path>
+        
+    </g>
+    
+</svg></i>
+            </span>
+          </a><a class="level-item" href='https://github.com/XiangpengHao' target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+    
+</svg></i>
+            </span>
+          </a><a class="level-item" href='https://linkedin.com/in/hao-xiangpeng' target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path stroke-width="1.8"
+        d="m5.839218,4.101561c0,1.211972 -0.974141,2.194011 -2.176459,2.194011s-2.176459,-0.982039 -2.176459,-2.194011c0,-1.211094 0.974141,-2.194011 2.176459,-2.194011s2.176459,0.982917 2.176459,2.194011zm0.017552,3.94922l-4.388022,0l0,14.04167l4.388022,0l0,-14.04167zm7.005038,0l-4.359939,0l0,14.04167l4.360816,0l0,-7.370999c0,-4.098413 5.291077,-4.433657 5.291077,0l0,7.370999l4.377491,0l0,-8.89101c0,-6.915523 -7.829986,-6.66365 -9.669445,-3.259423l0,-1.891237z" />
+    
+</svg></i>
+            </span>
+          </a><a class="level-item" href='https://blog.haoxp.xyz/index.xml' target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <g transform="scale(0.045)" stroke-width="40">
+        <path
+            d="M128.081 415.959c0 35.369-28.672 64.041-64.041 64.041S0 451.328 0 415.959s28.672-64.041 64.041-64.041 64.04 28.673 64.04 64.041zm175.66 47.25c-8.354-154.6-132.185-278.587-286.95-286.95C7.656 175.765 0 183.105 0 192.253v48.069c0 8.415 6.49 15.472 14.887 16.018 111.832 7.284 201.473 96.702 208.772 208.772.547 8.397 7.604 14.887 16.018 14.887h48.069c9.149.001 16.489-7.655 15.995-16.79zm144.249.288C439.596 229.677 251.465 40.445 16.503 32.01 7.473 31.686 0 38.981 0 48.016v48.068c0 8.625 6.835 15.645 15.453 15.999 191.179 7.839 344.627 161.316 352.465 352.465.353 8.618 7.373 15.453 15.999 15.453h48.068c9.034-.001 16.329-7.474 16.005-16.504z">
+        </path>
+    </g>
+    
+    
+</svg></i>
+            </span>
+          </a><a class="level-item" href='https://t.me/newsathlh' target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path
+        d="m 22.05,1.577 c -0.393,-0.016 -0.784,0.08 -1.117,0.235 -0.484,0.186 -4.92,1.902 -9.41,3.64 C 9.263,6.325 7.005,7.198 5.267,7.867 3.53,8.537 2.222,9.035 2.153,9.059 c -0.46,0.16 -1.082,0.362 -1.61,0.984 -0.79581202,1.058365 0.21077405,1.964825 1.004,2.499 1.76,0.564 3.58,1.102 5.087,1.608 0.556,1.96 1.09,3.927 1.618,5.89 0.174,0.394 0.553,0.54 0.944,0.544 l -0.002,0.02 c 0,0 0.307,0.03 0.606,-0.042 0.3,-0.07 0.677,-0.244 1.02,-0.565 0.377,-0.354 1.4,-1.36 1.98,-1.928 l 4.37,3.226 0.035,0.02 c 0,0 0.484,0.34 1.192,0.388 0.354,0.024 0.82,-0.044 1.22,-0.337 0.403,-0.294 0.67,-0.767 0.795,-1.307 0.374,-1.63 2.853,-13.427 3.276,-15.38 L 23.676,4.725 C 23.972,3.625 23.863,2.617 23.18,2.02 22.838,1.723 22.444,1.593 22.05,1.576 Z" />
+    
+</svg></i>
+            </span>
+          </a></nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="subtitle is-6 is-pulled-right">
+      
+    </div>
+    <h2 class="subtitle is-6">November 4, 2019</h2>
+    <h1 class="title">Is CLWB actually implemented?</h1>
+    
+    <div class="content">
+      
+
+<p>TLDR: No. <code>clwb</code> is just an alias of <code>clflushopt</code> on <code>Cascadelake</code>.</p>
+
+<h3 id="what-is-clwb-clflushopt-clflush">What is clwb, clflushopt, clflush?</h3>
+
+<p>It sounds crazy, but before <code>clflush</code> there isn&rsquo;t a instruction on Intel <code>x86</code> platform that can explicitly evict a cacheline.
+In other words, applications has no control of when their data should be flushed to memory.</p>
+
+<p>So Intel came up with their own solution, namely <code>clflush</code> (cache line flush), which flush a cache line.</p>
+
+<p>Though not explicitly mentioned, <code>clflush</code> not only writes a cache line to memory, but also eivcts the memory from the cache line,
+what&rsquo;s more, it will issue a hidden <code>mfence</code>.</p>
+
+<p>These two side-effects can have huge negative impacts on the performance, especially the hidden <code>mfence</code>, which stalls the cpu pipeline and materializes all store instructions.</p>
+
+<p>For compatibility concerns, Intel did not remove the <code>mfence</code> from <code>clflush</code>,
+ instead they introduced a new instruction called <code>clflushopt</code> (Skylake, 2018), which writes back the memory, evict the cache line but do not issue <code>mfence</code>.</p>
+
+<p>But <code>clflushopt</code> still far from ideal because it evicts the cache line which makes it inefficient when writing back hot memory. The problem gets worse with the advent of persistent memory, where <code>clflushopt</code> is mandatory for correctness and often used in hotpath.</p>
+
+<p>Again for compatibility reasons, Intel decided to introduce a new instruction on <code>Cascadelake</code> (2019), called <code>clwb</code>, which does everything <code>clflushopt</code> does, but it reserves the right to preserve cache lines.</p>
+
+<h3 id="does-it-really-work">Does it really work?</h3>
+
+<p>Intel <a href="https://www.felixcloutier.com/x86/clwb">says</a>:
+&gt;Retaining the line in the cache hierarchy is a performance optimization (treated as a hint by hardware) to reduce the possibility of cache miss on a subsequent access. Hardware may choose to retain the line at any of the levels in the cache hierarchy, and in some cases, may invalidate the line from the cache hierarchy. The source operand is a byte memory location.</p>
+
+<p><em>Retaining the line in the cache hierarchy is a performance optimization</em>,
+in other words there&rsquo;s no guarantee that <code>clwb</code> can retain the cache line, it&rsquo;s just an performance optimization.</p>
+
+<p>To allow applications to manually flush cache lines,
+Intel took more than five years to propose three different instructions, and yet none of them work perfectly.</p>
+
+<p><img src="/img/intel-clwb.jpg" width="200"/></p>
+
+<h3 id="let-s-test-it">Let&rsquo;s test it</h3>
+
+<p>My first test was to simply issue these instructions and compare the time of memory access. All the experiments are performed under <code>performance mode</code>, <code>O3</code> and with all hardware prefetchers disabled.</p>
+
+<p>Code to reproduce my results:
+<a href="https://gist.github.com/XiangpengHao/ddd63d6f6dc60d701583aae4c838787f">https://gist.github.com/XiangpengHao/ddd63d6f6dc60d701583aae4c838787f</a></p>
+
+<p><img src="/img/clwb-clflush.png" alt="" /></p>
+
+<ol>
+<li><p>There&rsquo;s no significant difference between <code>clwb</code>, <code>clflushopt</code>, <code>clflush</code>, and they all slower than reading from cache.</p></li>
+
+<li><p>There&rsquo;s no significant difference between temporal read and non-temporal read.
+This indicates that the CPU will check the cache even for non-temporal reads</p></li>
+</ol>
+
+<p>Looks like <code>clwb</code> isn&rsquo;t really helpful at retaining cache (at least in the CascadeLake).</p>
+
+<p>To confirm this, my second test used <code>perf</code> to directly count the cache misses.</p>
+
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Cache Miss</th>
+<th>Cache Reference</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Cache access</td>
+<td>440,054</td>
+<td>734,891</td>
+</tr>
+
+<tr>
+<td>Non-temporal access</td>
+<td>450,768</td>
+<td>735,937</td>
+</tr>
+
+<tr>
+<td><code>clwb</code> then non-temporal</td>
+<td>688,824</td>
+<td>740,203</td>
+</tr>
+
+<tr>
+<td>With <code>clwb</code></td>
+<td>692,845</td>
+<td>737,919</td>
+</tr>
+
+<tr>
+<td>With <code>clflushopt</code></td>
+<td>687,392</td>
+<td>736,697</td>
+</tr>
+
+<tr>
+<td>With <code>clflush</code></td>
+<td>688,151</td>
+<td>736,890</td>
+</tr>
+</tbody>
+</table>
+
+<p><code>clwb</code> and <code>clflushopt</code> have similar cache reference and cache miss &ndash;
+which means <code>clwb</code> is just an alias of <code>clflushopt</code> on their latest server CPU, shame on Intel!</p>
+
+<p>Update 12-02-2020:
+rewrite some sentences to improve clearity.</p>
+
+<p>Update 11-04-2019:
+clwb will evict the cache line even if it&rsquo;s <strong>NOT</strong> dirty.</p>
+
+      
+    </div>
+    
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p><a href="https://www.haoxp.xyz">Xiangpeng Hao</a> 2020</p>
+    
+  </div>
+</section>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-66103952-7', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+</body>
+</html>
+

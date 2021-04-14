@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Xiangpeng Hao</title>
+    <link>/posts/</link>
+    <description>Recent content in Posts on Xiangpeng Hao</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&lt;a href=&#34;https://www.haoxp.xyz&#34;&gt;Xiangpeng Hao&lt;/a&gt; 2020</copyright>
+    <lastBuildDate>Thu, 29 Oct 2020 19:23:31 +0800</lastBuildDate>
+    
+	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Guide to LTO between Rust and C/C&#43;&#43;</title>
+      <link>/posts/cross-lang-lto-guide/</link>
+      <pubDate>Thu, 29 Oct 2020 19:23:31 +0800</pubDate>
+      
+      <guid>/posts/cross-lang-lto-guide/</guid>
+      <description>I use Rust in one of my research projects. The project was originally developed in C++, and because C++ is bad we decided to add new features primarily in Rust.
+Calling Rust from C++ is simple and easy (thanks to the excellent cxx project), but we soon find some performance regressions that didn&amp;rsquo;t appear in the C++ code. Specifically, we see many tiny Rust functions in flamegraph that wouldn&amp;rsquo;t surface up if written in C++.</description>
+    </item>
+    
+    <item>
+      <title>System research frustrations</title>
+      <link>/posts/research-frustrations/</link>
+      <pubDate>Mon, 19 Oct 2020 14:58:31 +0800</pubDate>
+      
+      <guid>/posts/research-frustrations/</guid>
+      <description>&amp;hellip; we see a thriving software industry that largely ignores research, and a research community that writes papers rather than software. &amp;ndash; Rob Pike, Systems Software Research is Irrelevant
+ I heard/experienced these from my system research daily. I write them done not to complain or express my anger; instead, I know many people suffer from the same feeling: you are not alone.
+These are common cases in system research, and the situation will unlikely to improve due to the nature of research prototyping.</description>
+    </item>
+    
+    <item>
+      <title>Install Perf on WSL2 (with unwind and symbols)</title>
+      <link>/posts/wsl2-perf/</link>
+      <pubDate>Wed, 09 Sep 2020 12:39:03 +0800</pubDate>
+      
+      <guid>/posts/wsl2-perf/</guid>
+      <description>WSL2 don&amp;rsquo;t have perf and we can&amp;rsquo;t install it from Ubuntu apt because WSL2 has its own modified linux kernel (and perf requires a match with the kernel version).
+To install perf on WSL2, we need to clone the modified kernel and compile it with proper dependencies.
+sudo apt install flex bison gcc # Clone the kernel from MS repo git clone https://github.com/microsoft/WSL2-Linux-Kernel --depth 1 cd WSL2-Linux-Kernel/tools/perf # Optional dependencies to unwind stack and resolve symbols sudo apt install libnuma-dev libunwind-dev dwarfdump libdw-dev libelf-dev libiberty-dev make -j4 sudo cp perf /usr/local/bin Bonus I use the awesome flamegraph to automatically generate interactive flamegraph.</description>
+    </item>
+    
+    <item>
+      <title>Introducing the DB/Sys reading group</title>
+      <link>/posts/reading-group/</link>
+      <pubDate>Fri, 31 Jul 2020 10:46:03 -0700</pubDate>
+      
+      <guid>/posts/reading-group/</guid>
+      <description>TL;DR I started an RSS-based telegram channel that collects news around database, system, programming language and architecture. Check out here: https://t.me/db_sys_reading
+Goal &amp;ldquo;Become a better DB/Sys researcher&amp;rdquo;, which involves the following sub-goals: 1. Actively synchronize with the industry. 2. Be aware of other research problems. 3. Familiar with the tools, tricks and hidden secrets (if any).
+What is this? This channel is managed by an RSS bot that automatically pulls the curated list of blog sources.</description>
+    </item>
+    
+    <item>
+      <title>Transaction Isolation levels</title>
+      <link>/posts/isolation-levels/</link>
+      <pubDate>Wed, 01 Jul 2020 17:37:02 -0700</pubDate>
+      
+      <guid>/posts/isolation-levels/</guid>
+      <description>Summarize &amp;ldquo;A Critique of ANSI SQL Isolation Levels&amp;rdquo;, which I believe is one of the most important paper in the database research.
+ANSI SQL Isolation Level Phenomena Dirty read. A dirty read is the situation when a transaction reads a data that has not yet been committed.
+Non repeatable read. Non repeatable read occurs when a transaction reads the same row twice and get a different value each time.</description>
+    </item>
+    
+    <item>
+      <title>Resource Disaggregation</title>
+      <link>/posts/resource-disaggregation/</link>
+      <pubDate>Sat, 20 Jun 2020 12:20:42 -0700</pubDate>
+      
+      <guid>/posts/resource-disaggregation/</guid>
+      <description>This post is less of a paper review but more of some random thoughts about resources disaggregation.
+The two papers are &amp;ldquo;Understanding the Effect of Data Center Resource Disaggregation on Production DBMSs&amp;rdquo; and &amp;ldquo;Rethinking Data Management Systems for Disaggregated Data Centers&amp;rdquo;. The paper are easy to follow and educational, I learned a lot from them.
+What is resource disaggregation? Hardware resources (CPU, main memory, GPU, SSD, HDD) are split into independently managed pools that are connected by a high-performance network fabric.</description>
+    </item>
+    
+    <item>
+      <title>Paper Review: IR and Compiler</title>
+      <link>/posts/paper-review-ir/</link>
+      <pubDate>Mon, 18 May 2020 15:58:24 -0700</pubDate>
+      
+      <guid>/posts/paper-review-ir/</guid>
+      <description>Compilers are hot in this area, in this post I&amp;rsquo;ll review three representative papers that using compilers/IR to simplify and accelerate the system. In this review, I&amp;rsquo;ll focus on the story, i.e. the problem they tried to solve, rather than the tech details they employed to tune the performance. The goal of this review is to better understand the role of compilers/IR in data intensive systems.
+TVM: An Automated End-to-End Optimizing Compiler for Deep Learning TVM is a huge system with multiple essential components.</description>
+    </item>
+    
+    <item>
+      <title>A view of async memory access in rust</title>
+      <link>/posts/async-memory-access/</link>
+      <pubDate>Tue, 07 Apr 2020 14:51:35 -0700</pubDate>
+      
+      <guid>/posts/async-memory-access/</guid>
+      <description>Section 1: Background We have been using asyncio for years to hide the IO latency. Major high-level programming languages &amp;ndash; except C++, which is expect to have coroutine in C++20 &amp;ndash; have proper support for both language syntax (programmability) and user space scheduling (functionality).
+It&amp;rsquo;s common believe that coroutine has much smaller overhead than the operating system scheduler, but we don&amp;rsquo;t yet understand the potential of this &amp;ldquo;smaller overhead&amp;rdquo;. The reasons are two folds.</description>
+    </item>
+    
+    <item>
+      <title>Paper Review: tricky DB</title>
+      <link>/posts/paper-review-10/</link>
+      <pubDate>Mon, 30 Mar 2020 18:48:23 -0700</pubDate>
+      
+      <guid>/posts/paper-review-10/</guid>
+      <description>This week we will discuss about system tools for database systems. The first paper talks about the potential applications when remapping the virtual and physical memory is possible, and I&amp;rsquo;ll present the topics about coroutine, which deserves a whole separate post (todo).
+RUMA has it: Rewired User-space Memory Access is Possible! We can divide the paper into two parts: the first part shows how to do user space remapping, the second part shows the potential usages.</description>
+    </item>
+    
+    <item>
+      <title>Scientific writing cheat sheet</title>
+      <link>/posts/scientific-writing/</link>
+      <pubDate>Thu, 26 Mar 2020 16:09:21 -0700</pubDate>
+      
+      <guid>/posts/scientific-writing/</guid>
+      <description>.do { padding: 1em; border-left: 3px solid #c0caad; background: #f5f7fa; margin-bottom: 1em; } .dono{ padding: 1em; border-left: 3px solid #aa4465; background: #f5f7fa; margin-bottom: 1em; } b { font-weight: 500; }  Scientific writing can be tough, but we can improve it with some tricks and principles. Here is a list of writing tips from the course Writing in the Sciences.
+I&amp;rsquo;ll keep adding new tips as I go through the course.</description>
+    </item>
+    
+    <item>
+      <title>Paper Review: Disaggregated DB</title>
+      <link>/posts/paper-review-9/</link>
+      <pubDate>Mon, 23 Mar 2020 18:28:03 -0700</pubDate>
+      
+      <guid>/posts/paper-review-9/</guid>
+      <description>Disaggregation is a hot topic. This week&amp;rsquo;s two paper mainly discussed the recent trend in cloud native database systems. I believe the first paper (Database High Availability Using SHADOW Systems) is one of the early attempts towards the goal: decouple the computing nodes with the storage nodes. The second paper is a more complete and more involved, it show cased how cloud native architecture inside the AWS.
+Database High Availability Using SHADOW Systems Database systems achieves high availability by duplicating the database instances.</description>
+    </item>
+    
+    <item>
+      <title>Paper Review: DB on NIC</title>
+      <link>/posts/paper-review-8/</link>
+      <pubDate>Mon, 16 Mar 2020 16:21:05 -0700</pubDate>
+      
+      <guid>/posts/paper-review-8/</guid>
+      <description>This week&amp;rsquo;s topic is very like the &amp;ldquo;DB on new hardwares,&amp;rdquo; the difference is NIC has gained some special interests. The two papers, &amp;ldquo;HyperLoop&amp;rdquo; and &amp;ldquo;NetCache&amp;rdquo; are very interesting in terms of what problems they tried to solve.
+Some unrelated side notes: in the DB seattle report, people complained database conferences (VLDB and SIGMOD) are becoming elite conferences, where the reviewers asking for &amp;ldquo;perfect papers.&amp;rdquo; From my point of view, SIGCOMM (where the first paper comes from) indeed is a elite conference, which partially explains why the &amp;ldquo;Hyperloop&amp;rdquo; paper is extremely satisfying to read.</description>
+    </item>
+    
+    <item>
+      <title>Paper Review: Network DB</title>
+      <link>/posts/paper-review-7/</link>
+      <pubDate>Sun, 08 Mar 2020 11:59:26 -0700</pubDate>
+      
+      <guid>/posts/paper-review-7/</guid>
+      <description>This week&amp;rsquo;s papers talk about distributed database systems. So what&amp;rsquo;s the difference between distributed database systems and other distributed systems?
+In the case of distributed system, the main challenge is the limited bandwidth and sub-optimal TCP/IP protocol. Most of the research work was spent on reducing the inter-data center network and increase the intra-nodes traffic. This kind of work is very much like the magnified NUMA issues, the difference though, is the difference between WAN speed and LAN speed is much bigger than that of local socket and remote socket.</description>
+    </item>
+    
+    <item>
+      <title>Paper Review: Accelerators</title>
+      <link>/posts/paper-review-6/</link>
+      <pubDate>Sun, 01 Mar 2020 18:17:29 -0800</pubDate>
+      
+      <guid>/posts/paper-review-6/</guid>
+      <description>Accelerators, especially the FPGAs, have gained increasingly more popularity both in the industry and academia. The major reason behind this popularity stems from the end of Moore&amp;rsquo;s law, where people can not expect the CPU performance to grow exponentially to solve existing performance issues. In other words, we need to take actions to improve the system performance, otherwise it will likely to remain unchanged for the next few years.</description>
+    </item>
+    
+    <item>
+      <title>Paper Review: Persistent Memory</title>
+      <link>/posts/paper-review-5/</link>
+      <pubDate>Thu, 20 Feb 2020 11:54:11 -0800</pubDate>
+      
+      <guid>/posts/paper-review-5/</guid>
+      <description>Persistent memory is different from other new hardware, because it breaks some old assumptions and introduces more complex concepts. Other new hardware, like GPU, can transparently replace some part of computation pipeline, thus researchers mainly focus on how to exploit the computation power of new devices. Persistent memory, however, fundamentally changed how the programming itself should look like: it requires applications to take control of the CPU cache behavior (while it&amp;rsquo;s designed to be transparent), it asks for a new level of memory safety, and etc.</description>
+    </item>
+    
+    <item>
+      <title>A Guide to Locate Linux Kernel Bugs</title>
+      <link>/posts/kernel-bug-guide/</link>
+      <pubDate>Wed, 19 Feb 2020 12:40:12 -0800</pubDate>
+      
+      <guid>/posts/kernel-bug-guide/</guid>
+      <description>Recently we encountered yet another kernel bug: our data structure performs 3-4x slower on kernel v5.2 than on kernel v5.5.x
+So I tried to figure out exactly which commit caused the bug, and which commit fixed it. This is a very long journey, and it is extremely difficult for non-kernel developers to work on it.
+I found these experiences/lessons to be useful, hope they are helpful to you as well.</description>
+    </item>
+    
+    <item>
+      <title>A possible mmap bug from Linux kernel</title>
+      <link>/posts/mmap-bug/</link>
+      <pubDate>Thu, 06 Feb 2020 13:51:49 -0800</pubDate>
+      
+      <guid>/posts/mmap-bug/</guid>
+      <description>The theory Before I discuss about today&amp;rsquo;s bug, here&amp;rsquo;s a little bit background: https://lwn.net/Articles/758594/
+ mmap() is not allowed (by standards like POSIX by many years of history) to return an error when given unknown flags&amp;hellip; More serious is that there is no way for an application to know that the kernel it&amp;rsquo;s running on at the moment supports MAP_SYNC at all, since all kernels will return success with that flag set.</description>
+    </item>
+    
+    <item>
+      <title>Paper Review: Flash Memory</title>
+      <link>/posts/paper-review-4/</link>
+      <pubDate>Mon, 03 Feb 2020 12:42:49 -0800</pubDate>
+      
+      <guid>/posts/paper-review-4/</guid>
+      <description>Both papers are not interesting to me, it&amp;rsquo;s not that flash memory are uninteresting, but these techniques are too far away from my current research, i.e. I can not think critically on their approaches, they are more like good-to-know papers.
+Page-Differential Logging: An Efficient and DBMS-Independent Approach for Storing Data into Flash Memory This paper tried to solve a old problem: asymmetric read/write time of data storage, in the context of flash memory, this paper also helps to improve the wear-level and thus increase the longevity of the storage device.</description>
+    </item>
+    
+    <item>
+      <title>Paper Review: Indexing</title>
+      <link>/posts/paper-review-3/</link>
+      <pubDate>Mon, 27 Jan 2020 14:32:18 -0800</pubDate>
+      
+      <guid>/posts/paper-review-3/</guid>
+      <description>Key words: many-core, latch-free, cache, memory
+The Bw-Tree: A B-tree for New Hardware Platforms BwTree is a b+tree trying to fit with multi-core processor and flash based storage. To deal with multi-core processors the authors argued we ultimately need to achieve latch-free in order to eliminate the thread synchronization cost. To co-operate with the flash storage, the BwTree utilized the mapping table as the base for other innovations, such as delta updating and less internal node modifications.</description>
+    </item>
+    
+    <item>
+      <title>Unaligned mmap can decrease performance, and the lessons learned</title>
+      <link>/posts/mmap-performance/</link>
+      <pubDate>Sat, 25 Jan 2020 14:31:39 -0800</pubDate>
+      
+      <guid>/posts/mmap-performance/</guid>
+      <description>Several days ago I was told a mysterious bug: the performance of our new data structure is unstable across different benchmark execution, specifically, the throughput fluctuates from 1x to 10x. Further investment shows that the root cause comes from uncommonly high page faults.
+There&amp;rsquo;s a long journey to find out the real problem, yet the conclusion is simple:
+Unaligned mmap address can significantly decrease the performance, but it&#39;s deceptively easy to mmap an unaligned address, especially for persistent memory.</description>
+    </item>
+    
+    <item>
+      <title>Paper Review: Concurrency Control</title>
+      <link>/posts/paper-review-2/</link>
+      <pubDate>Mon, 20 Jan 2020 16:26:27 -0800</pubDate>
+      
+      <guid>/posts/paper-review-2/</guid>
+      <description>FOEDUS: OLTP Engine for a Thousand Cores and NVRAM This is a very high-level paper about the overview of a complex system, yet it fits into the category: build a new system using existing components. The paper tried to address two sub topics: 1) database systems that scale to 1000 cores, 2) database systems on NVRAM.
+Although the paper claimed to solved the issues, I personally did not enjoy reading it because I didn&amp;rsquo;t see a clear logic flow on solving problems.</description>
+    </item>
+    
+    <item>
+      <title>Paper Review: Database System Architectures</title>
+      <link>/posts/paper-review-1/</link>
+      <pubDate>Mon, 13 Jan 2020 22:18:18 -0800</pubDate>
+      
+      <guid>/posts/paper-review-1/</guid>
+      <description>In a nutshell: data is migrating from disk to memory, and how can we design new system to fit this trend.
+The End of an Architectural Era (It’s Time for a Complete Rewrite) (2007) In this paper, the authors tried to convince that the old one-fit-all database architecture is no longer fit for the emerging hardwares, database researchers should start with new empty sheets of paper and focus on tomorrow&amp;rsquo;s requirements.</description>
+    </item>
+    
+    <item>
+      <title>My Privacy Preserved Smart Home</title>
+      <link>/posts/smart_home/</link>
+      <pubDate>Sun, 15 Dec 2019 22:48:32 -0800</pubDate>
+      
+      <guid>/posts/smart_home/</guid>
+      <description>I&amp;rsquo;ve been looking for an ultimate smart home solution for a while, yet none of them fit my needs.
+In an ideal world, a smart home will have the following features:
+ What happens in my room stays in my room. Privacy is my first concern when considering a smart home. I don&amp;rsquo;t trust big evil companies. Thus any products from Google or Amazon lose the competition.
+ It should be highly customizable.</description>
+    </item>
+    
+    <item>
+      <title>Is CLWB actually implemented?</title>
+      <link>/posts/is-clwb-implemented/</link>
+      <pubDate>Mon, 04 Nov 2019 14:16:45 -0700</pubDate>
+      
+      <guid>/posts/is-clwb-implemented/</guid>
+      <description>TLDR: No. clwb is just an alias of clflushopt on Cascadelake.
+What is clwb, clflushopt, clflush? It sounds crazy, but before clflush there isn&amp;rsquo;t a instruction on Intel x86 platform that can explicitly evict a cacheline. In other words, applications has no control of when their data should be flushed to memory.
+So Intel came up with their own solution, namely clflush (cache line flush), which flush a cache line.</description>
+    </item>
+    
+    <item>
+      <title>Photos: Sunday Afternoon @SFU</title>
+      <link>/posts/sunday-burnabypark/</link>
+      <pubDate>Sun, 25 Aug 2019 18:59:28 -0700</pubDate>
+      
+      <guid>/posts/sunday-burnabypark/</guid>
+      <description>Disclaimer: I&amp;rsquo;m a novice photographing hobbyist, who can&amp;rsquo;t afford expensive lens/cameras, and lazy enough not to practice photographing skills.
+  Bird @Bay4     Undefined Building       Undefined Building     Undefined Building     Running     A peek into Vancouver     Wanna try?     National Flag   </description>
+    </item>
+    
+    <item>
+      <title>[Debugger] Memory Visualizer?</title>
+      <link>/posts/memory-visualizer/</link>
+      <pubDate>Sat, 24 Aug 2019 18:55:40 -0700</pubDate>
+      
+      <guid>/posts/memory-visualizer/</guid>
+      <description>For months I&amp;rsquo;ve been imaging how beautiful my life can be if lldb (or less likely gdb) has something called memory visualizer.
+As my core research goal is to design efficient data structures that fits any workload on any devices. I frequently need to check how my data structure really looks like in the memory, and how it grows/shrimps on certain access pattern. What&amp;rsquo;s more, a memory visualizer can be extremely helpful when debugging concurrency bugs, because you never know where the bugs is, and a visualizer just adds much much more insights than breakpoints.</description>
+    </item>
+    
+    <item>
+      <title>How fast is Intel DC Persistent Memory Module?</title>
+      <link>/posts/optane-performance/</link>
+      <pubDate>Wed, 14 Aug 2019 15:29:21 -0700</pubDate>
+      
+      <guid>/posts/optane-performance/</guid>
+      <description>TL;DR: Slow, SSD-level.
+More details checkout this paper.
+I only measured write performance, using the tool pqos-os by Intel.
+System Configuration    Item Spec     CPU Intel&amp;reg; Xeon&amp;reg; Gold 6252 CPU @ 2.10GHz * 2   DRAM 2666 MHz - 6 * 32 GB * 2   Intel DCPMM 2666 MHz - 4 * 128 GB * 2   Linux Distro/Kernel Arch Linux - 5.</description>
+    </item>
+    
+    <item>
+      <title>What&#39;s it like to program on a $26k computer</title>
+      <link>/posts/new-server/</link>
+      <pubDate>Fri, 09 Aug 2019 20:39:54 -0700</pubDate>
+      
+      <guid>/posts/new-server/</guid>
+      <description>Our new server (left bottom) just arrived today.
+Fun facts  It has ten hard drive slots, but only one slot is used, installed a single 240 GiB SATA intel SSD.
+ It has 1.408 TiB memory (12x32 GiB DRAM + 8x128 GiB Optane), and we plan to reach 1.92 TiB memory (12x32 GiB DRAM + 12x128 GiB Optane) next month.
+ There&amp;rsquo;re two 24 core Intel&amp;reg; Xeon&amp;reg; Gold 6252 CPU installed, with hyper-thread enabled, htop is like:  It takes 10 mins to boot, and loud enough to wake up everyone in the lab.</description>
+    </item>
+    
+    <item>
+      <title>Modern allocator: mimalloc</title>
+      <link>/posts/mimalloc-review/</link>
+      <pubDate>Fri, 26 Jul 2019 17:36:49 -0700</pubDate>
+      
+      <guid>/posts/mimalloc-review/</guid>
+      <description>Memory management, especially memory allocation has been a important bottleneck of high performance multi-thread systems.
+The following figure shows one my of experiments on high performance in-memory indexes. The experiment is performed on a four-socket machine with 40 physical cores in total. The yellow line shows the result with jemalloc and grey lines shows the throughput with glibc malloc.
+There&amp;rsquo;re two problems with glibc malloc:
+ It&amp;rsquo;s slower than jemalloc</description>
+    </item>
+    
+    <item>
+      <title>Efficient(correct) way to check a bit value in C/C&#43;&#43; </title>
+      <link>/posts/check-bit-set/</link>
+      <pubDate>Tue, 23 Jul 2019 20:04:48 -0700</pubDate>
+      
+      <guid>/posts/check-bit-set/</guid>
+      <description>It&amp;rsquo;s very common to manipulate data in the bit granularity in high performance systems, and checking whether a bit equals to 1 is one of the primary operations.
+The way I usually do is:
+#define CHECK_BIT(var, pos) ((((var) &amp;amp; (1 &amp;lt;&amp;lt; pos)) &amp;gt; 0) ? (1) : (0))  It basically creates a mask and perform an and operation against the variable, it&amp;rsquo;s simple and intuitive enough that I never thought it can be a bottleneck.</description>
+    </item>
+    
+    <item>
+      <title>Db Learning Summary Three</title>
+      <link>/posts/db-learning-summary-three/</link>
+      <pubDate>Sun, 31 Mar 2019 11:32:50 -0700</pubDate>
+      
+      <guid>/posts/db-learning-summary-three/</guid>
+      <description>Main memory DBMS Concurrency Control  Not a solved problem, especially in main memory database system. Major overhead: lock manager overhead, pessimistic locking overhead Solutions: new locking algorithms, OCC, hybrids.  lock manager overhead: VLL  co-locate locks with records, get rid of lock manager assumption: know the read/write in advance  pessimistic locking overhead: OCC or OCC hybrids  assumption: conflicts are rare. assumption not always hold, OCC doesn&amp;rsquo;t work under high contention.</description>
+    </item>
+    
+    <item>
+      <title>Database System Learning Summary Two</title>
+      <link>/posts/db-learning-summary-two/</link>
+      <pubDate>Mon, 25 Feb 2019 20:24:45 -0800</pubDate>
+      
+      <guid>/posts/db-learning-summary-two/</guid>
+      <description>Ensure data reaches to storage from buffer pool (When should update write to storage?)
+ Force: write every change immediately to storage No-Force: Only write to storage when needed - desired  Ensure either all or no changes are persisted (atomic)
+ No-steal: keep all modification until commit Steal: allow early write-back before commit - desired  Database systems use log to ensure atomicity and durability. A log record consists of values changed it will help the recovery process to recovery the record to a consistent state.</description>
+    </item>
+    
+    <item>
+      <title>Database System Learning Summary One</title>
+      <link>/posts/db-learning-summary-one/</link>
+      <pubDate>Sun, 10 Feb 2019 15:42:25 -0800</pubDate>
+      
+      <guid>/posts/db-learning-summary-one/</guid>
+      <description>NUMA. A server may have multiple processors (sockets), each socket may have multiple physical cores, each core may carry multiple threads (hyper-threads). Memory is partitioned on multi-socket machines, where each socket has its own local memory but it can access (remote) memory from other sockets. Accessing remote memory is slower (due to latency?) than accessing local memory, this is called NUMA effect. Memory Hierarchy. L1 cache reference: 0.5 ns, L2 cache reference: 7 ns, Main memory reference: 50 ns.</description>
+    </item>
+    
+    <item>
+      <title>Install Arch Linux on Hyper V</title>
+      <link>/posts/install-arch-linux-on-hyper-v/</link>
+      <pubDate>Thu, 15 Mar 2018 01:28:32 -0700</pubDate>
+      
+      <guid>/posts/install-arch-linux-on-hyper-v/</guid>
+      <description>Windows 10 Pro edition ships with a fully functioned hyper-v, which is a high-performance virtual machine widely used by the industry.
+Thanks to the bad reputation for being unfriendly to newcomers, Hyper-V is a lot less-known by the public, especially when compared to VMware or Virtual Box. The problem of these two virtual machines is either expensive (VMware) or low-performance (VBox). So I finally decided to investigate on Hyper-V and try the state-of-the-art technology from Microsoft.</description>
+    </item>
+    
+  </channel>
+</rss>

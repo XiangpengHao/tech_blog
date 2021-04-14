@@ -1,0 +1,355 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Xiangpeng Hao</title>
+    <link>/</link>
+    <description>Recent content on Xiangpeng Hao</description>
+    <generator>Hugo - gohugo.io</generator>
+    <language>en</language>
+    <contact></contact>
+    <copyright><a href="https://www.haoxp.xyz">Xiangpeng Hao</a> 2020</copyright>
+    
+        <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Guide to LTO between Rust and C/C&#43;&#43;</title>
+      <link>/posts/cross-lang-lto-guide/</link>
+      <pubDate>Thu, 29 Oct 2020 19:23:31 +0800</pubDate>
+      <author></author>
+      <guid>/posts/cross-lang-lto-guide/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>System research frustrations</title>
+      <link>/posts/research-frustrations/</link>
+      <pubDate>Mon, 19 Oct 2020 14:58:31 +0800</pubDate>
+      <author></author>
+      <guid>/posts/research-frustrations/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Install Perf on WSL2 (with unwind and symbols)</title>
+      <link>/posts/wsl2-perf/</link>
+      <pubDate>Wed, 09 Sep 2020 12:39:03 +0800</pubDate>
+      <author></author>
+      <guid>/posts/wsl2-perf/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Introducing the DB/Sys reading group</title>
+      <link>/posts/reading-group/</link>
+      <pubDate>Fri, 31 Jul 2020 10:46:03 -0700</pubDate>
+      <author></author>
+      <guid>/posts/reading-group/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Transaction Isolation levels</title>
+      <link>/posts/isolation-levels/</link>
+      <pubDate>Wed, 01 Jul 2020 17:37:02 -0700</pubDate>
+      <author></author>
+      <guid>/posts/isolation-levels/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Resource Disaggregation</title>
+      <link>/posts/resource-disaggregation/</link>
+      <pubDate>Sat, 20 Jun 2020 12:20:42 -0700</pubDate>
+      <author></author>
+      <guid>/posts/resource-disaggregation/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Paper Review: IR and Compiler</title>
+      <link>/posts/paper-review-ir/</link>
+      <pubDate>Mon, 18 May 2020 15:58:24 -0700</pubDate>
+      <author></author>
+      <guid>/posts/paper-review-ir/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>A view of async memory access in rust</title>
+      <link>/posts/async-memory-access/</link>
+      <pubDate>Tue, 07 Apr 2020 14:51:35 -0700</pubDate>
+      <author></author>
+      <guid>/posts/async-memory-access/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Paper Review: tricky DB</title>
+      <link>/posts/paper-review-10/</link>
+      <pubDate>Mon, 30 Mar 2020 18:48:23 -0700</pubDate>
+      <author></author>
+      <guid>/posts/paper-review-10/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Scientific writing cheat sheet</title>
+      <link>/posts/scientific-writing/</link>
+      <pubDate>Thu, 26 Mar 2020 16:09:21 -0700</pubDate>
+      <author></author>
+      <guid>/posts/scientific-writing/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Paper Review: Disaggregated DB</title>
+      <link>/posts/paper-review-9/</link>
+      <pubDate>Mon, 23 Mar 2020 18:28:03 -0700</pubDate>
+      <author></author>
+      <guid>/posts/paper-review-9/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Paper Review: DB on NIC</title>
+      <link>/posts/paper-review-8/</link>
+      <pubDate>Mon, 16 Mar 2020 16:21:05 -0700</pubDate>
+      <author></author>
+      <guid>/posts/paper-review-8/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Paper Review: Network DB</title>
+      <link>/posts/paper-review-7/</link>
+      <pubDate>Sun, 08 Mar 2020 11:59:26 -0700</pubDate>
+      <author></author>
+      <guid>/posts/paper-review-7/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Paper Review: Accelerators</title>
+      <link>/posts/paper-review-6/</link>
+      <pubDate>Sun, 01 Mar 2020 18:17:29 -0800</pubDate>
+      <author></author>
+      <guid>/posts/paper-review-6/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Paper Review: Persistent Memory</title>
+      <link>/posts/paper-review-5/</link>
+      <pubDate>Thu, 20 Feb 2020 11:54:11 -0800</pubDate>
+      <author></author>
+      <guid>/posts/paper-review-5/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>A Guide to Locate Linux Kernel Bugs</title>
+      <link>/posts/kernel-bug-guide/</link>
+      <pubDate>Wed, 19 Feb 2020 12:40:12 -0800</pubDate>
+      <author></author>
+      <guid>/posts/kernel-bug-guide/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>A possible mmap bug from Linux kernel</title>
+      <link>/posts/mmap-bug/</link>
+      <pubDate>Thu, 06 Feb 2020 13:51:49 -0800</pubDate>
+      <author></author>
+      <guid>/posts/mmap-bug/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Paper Review: Flash Memory</title>
+      <link>/posts/paper-review-4/</link>
+      <pubDate>Mon, 03 Feb 2020 12:42:49 -0800</pubDate>
+      <author></author>
+      <guid>/posts/paper-review-4/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Paper Review: Indexing</title>
+      <link>/posts/paper-review-3/</link>
+      <pubDate>Mon, 27 Jan 2020 14:32:18 -0800</pubDate>
+      <author></author>
+      <guid>/posts/paper-review-3/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Unaligned mmap can decrease performance, and the lessons learned</title>
+      <link>/posts/mmap-performance/</link>
+      <pubDate>Sat, 25 Jan 2020 14:31:39 -0800</pubDate>
+      <author></author>
+      <guid>/posts/mmap-performance/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Paper Review: Concurrency Control</title>
+      <link>/posts/paper-review-2/</link>
+      <pubDate>Mon, 20 Jan 2020 16:26:27 -0800</pubDate>
+      <author></author>
+      <guid>/posts/paper-review-2/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Paper Review: Database System Architectures</title>
+      <link>/posts/paper-review-1/</link>
+      <pubDate>Mon, 13 Jan 2020 22:18:18 -0800</pubDate>
+      <author></author>
+      <guid>/posts/paper-review-1/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>My Privacy Preserved Smart Home</title>
+      <link>/posts/smart_home/</link>
+      <pubDate>Sun, 15 Dec 2019 22:48:32 -0800</pubDate>
+      <author></author>
+      <guid>/posts/smart_home/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Is CLWB actually implemented?</title>
+      <link>/posts/is-clwb-implemented/</link>
+      <pubDate>Mon, 04 Nov 2019 14:16:45 -0700</pubDate>
+      <author></author>
+      <guid>/posts/is-clwb-implemented/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Photos: Sunday Afternoon @SFU</title>
+      <link>/posts/sunday-burnabypark/</link>
+      <pubDate>Sun, 25 Aug 2019 18:59:28 -0700</pubDate>
+      <author></author>
+      <guid>/posts/sunday-burnabypark/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>[Debugger] Memory Visualizer?</title>
+      <link>/posts/memory-visualizer/</link>
+      <pubDate>Sat, 24 Aug 2019 18:55:40 -0700</pubDate>
+      <author></author>
+      <guid>/posts/memory-visualizer/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>How fast is Intel DC Persistent Memory Module?</title>
+      <link>/posts/optane-performance/</link>
+      <pubDate>Wed, 14 Aug 2019 15:29:21 -0700</pubDate>
+      <author></author>
+      <guid>/posts/optane-performance/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>What&#39;s it like to program on a $26k computer</title>
+      <link>/posts/new-server/</link>
+      <pubDate>Fri, 09 Aug 2019 20:39:54 -0700</pubDate>
+      <author></author>
+      <guid>/posts/new-server/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Modern allocator: mimalloc</title>
+      <link>/posts/mimalloc-review/</link>
+      <pubDate>Fri, 26 Jul 2019 17:36:49 -0700</pubDate>
+      <author></author>
+      <guid>/posts/mimalloc-review/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Efficient(correct) way to check a bit value in C/C&#43;&#43; </title>
+      <link>/posts/check-bit-set/</link>
+      <pubDate>Tue, 23 Jul 2019 20:04:48 -0700</pubDate>
+      <author></author>
+      <guid>/posts/check-bit-set/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Db Learning Summary Three</title>
+      <link>/posts/db-learning-summary-three/</link>
+      <pubDate>Sun, 31 Mar 2019 11:32:50 -0700</pubDate>
+      <author></author>
+      <guid>/posts/db-learning-summary-three/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Database System Learning Summary Two</title>
+      <link>/posts/db-learning-summary-two/</link>
+      <pubDate>Mon, 25 Feb 2019 20:24:45 -0800</pubDate>
+      <author></author>
+      <guid>/posts/db-learning-summary-two/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Database System Learning Summary One</title>
+      <link>/posts/db-learning-summary-one/</link>
+      <pubDate>Sun, 10 Feb 2019 15:42:25 -0800</pubDate>
+      <author></author>
+      <guid>/posts/db-learning-summary-one/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Install Arch Linux on Hyper V</title>
+      <link>/posts/install-arch-linux-on-hyper-v/</link>
+      <pubDate>Thu, 15 Mar 2018 01:28:32 -0700</pubDate>
+      <author></author>
+      <guid>/posts/install-arch-linux-on-hyper-v/</guid>
+      <description></description>
+      
+    </item>
+    
+  </channel>
+</rss>

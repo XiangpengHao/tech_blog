@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/posts/cross-lang-lto-guide/</loc>
+    <lastmod>2020-10-29T19:23:31+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/</loc>
+    <lastmod>2020-10-29T19:23:31+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2020-10-29T19:23:31+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/research-frustrations/</loc>
+    <lastmod>2020-10-19T14:58:31+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/wsl2-perf/</loc>
+    <lastmod>2020-09-09T12:39:03+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/reading-group/</loc>
+    <lastmod>2020-07-31T10:46:03-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/isolation-levels/</loc>
+    <lastmod>2020-07-01T17:37:02-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/resource-disaggregation/</loc>
+    <lastmod>2020-06-20T12:20:42-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/paper-review-ir/</loc>
+    <lastmod>2020-05-18T15:58:24-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/async-memory-access/</loc>
+    <lastmod>2020-04-07T14:51:35-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/paper-review-10/</loc>
+    <lastmod>2020-03-30T18:48:23-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/scientific-writing/</loc>
+    <lastmod>2020-03-26T16:09:21-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/paper-review-9/</loc>
+    <lastmod>2020-03-23T18:28:03-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/paper-review-8/</loc>
+    <lastmod>2020-03-16T16:21:05-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/paper-review-7/</loc>
+    <lastmod>2020-03-08T11:59:26-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/paper-review-6/</loc>
+    <lastmod>2020-03-01T18:17:29-08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/paper-review-5/</loc>
+    <lastmod>2020-02-20T11:54:11-08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/kernel-bug-guide/</loc>
+    <lastmod>2020-02-19T12:40:12-08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/mmap-bug/</loc>
+    <lastmod>2020-02-06T13:51:49-08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/paper-review-4/</loc>
+    <lastmod>2020-02-03T12:42:49-08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/paper-review-3/</loc>
+    <lastmod>2020-01-27T14:32:18-08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/mmap-performance/</loc>
+    <lastmod>2020-01-25T14:31:39-08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/paper-review-2/</loc>
+    <lastmod>2020-01-20T16:26:27-08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/paper-review-1/</loc>
+    <lastmod>2020-01-13T22:18:18-08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/smart_home/</loc>
+    <lastmod>2019-12-15T22:48:32-08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/is-clwb-implemented/</loc>
+    <lastmod>2019-11-04T14:16:45-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/sunday-burnabypark/</loc>
+    <lastmod>2019-08-25T18:59:28-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/memory-visualizer/</loc>
+    <lastmod>2019-08-24T18:55:40-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/optane-performance/</loc>
+    <lastmod>2019-08-14T15:29:21-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/new-server/</loc>
+    <lastmod>2019-08-09T20:39:54-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/mimalloc-review/</loc>
+    <lastmod>2019-07-26T17:36:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/check-bit-set/</loc>
+    <lastmod>2019-07-23T20:04:48-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/db-learning-summary-three/</loc>
+    <lastmod>2019-03-31T11:32:50-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/db-learning-summary-two/</loc>
+    <lastmod>2019-02-25T20:24:45-08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/db-learning-summary-one/</loc>
+    <lastmod>2019-02-10T15:42:25-08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/install-arch-linux-on-hyper-v/</loc>
+    <lastmod>2018-03-15T01:28:32-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+  </url>
+  
+</urlset>

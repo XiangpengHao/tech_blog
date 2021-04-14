@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  lang="en-us" >
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+    <title>A view of async memory access in rust | Xiangpeng Hao</title>
+     <meta property='og:title' content='A view of async memory access in rust - Xiangpeng Hao'>
+<meta property='og:description' content='Section 1: Background We have been using asyncio for years to hide the IO latency. Major high-level programming languages &ndash; except C&#43;&#43;, which is expect to have coroutine in C&#43;&#43;20 &ndash; have proper support for both language syntax (programmability) and user space scheduling (functionality).
+It&rsquo;s common believe that coroutine has much smaller overhead than the operating system scheduler, but we don&rsquo;t yet understand the potential of this &ldquo;smaller overhead&rdquo;. The reasons are two folds.'>
+<meta property='og:url' content='/posts/async-memory-access/'>
+<meta property='og:site_name' content='Xiangpeng Hao'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts'><meta property='article:published_time' content='2020-04-07T14:51:35-07:00'/><meta property='article:modified_time' content='2020-04-07T14:51:35-07:00'/><meta name='twitter:card' content='summary'><meta name='twitter:site' content='@'><meta name='twitter:creator' content='@'>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="shortcut icon" href="favicon.png" /></head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="/"><h1 class="title is-4">Xiangpeng Hao</h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile"><a class="level-item" href='https://haoxp.xyz' target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <g transform="scale(0.042)" stroke-width="4">
+        <path fill="currentColor"
+            d="M528 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h480c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm0 400H48V80h480v352zM208 256c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm-89.6 128h179.2c12.4 0 22.4-8.6 22.4-19.2v-19.2c0-31.8-30.1-57.6-67.2-57.6-10.8 0-18.7 8-44.8 8-26.9 0-33.4-8-44.8-8-37.1 0-67.2 25.8-67.2 57.6v19.2c0 10.6 10 19.2 22.4 19.2zM360 320h112c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8H360c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8zm0-64h112c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8H360c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8zm0-64h112c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8H360c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8z">
+        </path>
+        
+    </g>
+    
+</svg></i>
+            </span>
+          </a><a class="level-item" href='https://github.com/XiangpengHao' target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+    
+</svg></i>
+            </span>
+          </a><a class="level-item" href='https://linkedin.com/in/hao-xiangpeng' target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path stroke-width="1.8"
+        d="m5.839218,4.101561c0,1.211972 -0.974141,2.194011 -2.176459,2.194011s-2.176459,-0.982039 -2.176459,-2.194011c0,-1.211094 0.974141,-2.194011 2.176459,-2.194011s2.176459,0.982917 2.176459,2.194011zm0.017552,3.94922l-4.388022,0l0,14.04167l4.388022,0l0,-14.04167zm7.005038,0l-4.359939,0l0,14.04167l4.360816,0l0,-7.370999c0,-4.098413 5.291077,-4.433657 5.291077,0l0,7.370999l4.377491,0l0,-8.89101c0,-6.915523 -7.829986,-6.66365 -9.669445,-3.259423l0,-1.891237z" />
+    
+</svg></i>
+            </span>
+          </a><a class="level-item" href='https://blog.haoxp.xyz/index.xml' target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <g transform="scale(0.045)" stroke-width="40">
+        <path
+            d="M128.081 415.959c0 35.369-28.672 64.041-64.041 64.041S0 451.328 0 415.959s28.672-64.041 64.041-64.041 64.04 28.673 64.04 64.041zm175.66 47.25c-8.354-154.6-132.185-278.587-286.95-286.95C7.656 175.765 0 183.105 0 192.253v48.069c0 8.415 6.49 15.472 14.887 16.018 111.832 7.284 201.473 96.702 208.772 208.772.547 8.397 7.604 14.887 16.018 14.887h48.069c9.149.001 16.489-7.655 15.995-16.79zm144.249.288C439.596 229.677 251.465 40.445 16.503 32.01 7.473 31.686 0 38.981 0 48.016v48.068c0 8.625 6.835 15.645 15.453 15.999 191.179 7.839 344.627 161.316 352.465 352.465.353 8.618 7.373 15.453 15.999 15.453h48.068c9.034-.001 16.329-7.474 16.005-16.504z">
+        </path>
+    </g>
+    
+    
+</svg></i>
+            </span>
+          </a><a class="level-item" href='https://t.me/newsathlh' target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path
+        d="m 22.05,1.577 c -0.393,-0.016 -0.784,0.08 -1.117,0.235 -0.484,0.186 -4.92,1.902 -9.41,3.64 C 9.263,6.325 7.005,7.198 5.267,7.867 3.53,8.537 2.222,9.035 2.153,9.059 c -0.46,0.16 -1.082,0.362 -1.61,0.984 -0.79581202,1.058365 0.21077405,1.964825 1.004,2.499 1.76,0.564 3.58,1.102 5.087,1.608 0.556,1.96 1.09,3.927 1.618,5.89 0.174,0.394 0.553,0.54 0.944,0.544 l -0.002,0.02 c 0,0 0.307,0.03 0.606,-0.042 0.3,-0.07 0.677,-0.244 1.02,-0.565 0.377,-0.354 1.4,-1.36 1.98,-1.928 l 4.37,3.226 0.035,0.02 c 0,0 0.484,0.34 1.192,0.388 0.354,0.024 0.82,-0.044 1.22,-0.337 0.403,-0.294 0.67,-0.767 0.795,-1.307 0.374,-1.63 2.853,-13.427 3.276,-15.38 L 23.676,4.725 C 23.972,3.625 23.863,2.617 23.18,2.02 22.838,1.723 22.444,1.593 22.05,1.576 Z" />
+    
+</svg></i>
+            </span>
+          </a></nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="subtitle is-6 is-pulled-right">
+      
+    </div>
+    <h2 class="subtitle is-6">April 7, 2020</h2>
+    <h1 class="title">A view of async memory access in rust</h1>
+    
+    <div class="content">
+      
+
+<h2 id="section-1-background">Section 1: Background</h2>
+
+<p>We have been using asyncio for years to hide the IO latency.
+Major high-level programming languages &ndash; except C++, which is expect to have coroutine in C++20 &ndash; have proper support for both language syntax (programmability) and user space scheduling (functionality).</p>
+
+<p>It&rsquo;s common believe that coroutine has much smaller overhead than the operating system scheduler, but we don&rsquo;t yet understand the potential of this &ldquo;smaller overhead&rdquo;.
+The reasons are two folds. First, those high level programming languages (Python, Java, Go) don&rsquo;t really care about &ldquo;system programming&rdquo;,
+where memory layout and cache friendliness is vital.
+They tend to implement the coroutine with costly stack frames, and in such cases, the implementation overhead varies.
+Second, none of the major system programming languages &ndash; especially those with zero-overhead claim languages &ndash; has proper support for coroutine.
+Without the joint efforts of language design and compiler optimization, we won&rsquo;t have the chance to push the overhead limit.</p>
+
+<p>Rust is the first challenger.
+After years of debating and improving, Rust finally launched its initial stable support for async/await (in Nov 2019).
+Rust is also the first programming language that claims &ldquo;zero-overhead abstraction&rdquo; on the coroutine support.
+For those who are not familiar with the term &ldquo;zero-overhead abstraction&rdquo;, here&rsquo;s a definition from the creator of C++:</p>
+
+<blockquote>
+<p>What you don&rsquo;t use, you don&rsquo;t pay for (in time or space) and further: What you do use, you couldn&rsquo;t hand code any better.</p>
+</blockquote>
+
+<p>Previous researches<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup> have shown the vendor-specific coroutine implementations in C++ have the overhead less than a memory access,
+in other words, we might be able to use coroutine to hide the memory stall on cache miss.</p>
+
+<p>In this post, I&rsquo;ll explore how to use Rust to perform async memory access in section 2,
+then I&rsquo;ll present the design and implementation of a minimal scheduler in section 3,
+and lastly I&rsquo;ll benchmark the system and perform a micro-architecture analysis to measure the overhead of rust task scheduling.</p>
+
+<h2 id="section-2-async-memory-access">Section 2: Async Memory Access</h2>
+
+<p>Recall that async IO scheduling requires tasks to voluntarily give up the control when the IO operation begins,
+and notify the scheduler when the IO operation finishes.
+Once received the notification from the task, the scheduler will add the task to the ready queue so it will have chances to continue its work.</p>
+
+<p>Async memory access imitates this pattern: when a task encountering a cache miss, it voluntarily give up the control.
+The difference is that instead of removing it from the task queue and waiting for the ready signal, the scheduler will immediately append the task to the end of the ready queue.
+This is because we don&rsquo;t have a mechanism for the task to notify the scheduler.</p>
+
+<p>IO operations often have clear boundaries on IO begin and IO ends.
+For example, the programmer knows when the networking IO starts so it can notify the scheduler timely,
+the networking device/operating system offers a mechanism to wake the scheduler when the networking IO is finished,
+so that the scheduler can add the task back to the ready queue.</p>
+
+<p>Async memory access, unfortunately, don&rsquo;t have this property.
+Our current architecture lacks a mechanism to indicate whether a memory address exists in the cache.
+This means that programmers need to <strong>guess</strong> when to switch out and when to switch back.
+Some papers<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup> suggest future hardware to support this feature, but it&rsquo;s unlikely to happen in the near future.</p>
+
+<p>A bad guess of cache existence can be costly: task switch can be profitable only when memory is not present in cache,
+otherwise it&rsquo;s pure overhead.
+However, unlike the hardware pre-fetching where low level implementation has limited view of software behaviors,
+user space async memory access can benefit from high level semantics.
+For example, if the programmer is to access the leaf node of a large b+ tree,
+the memory access will very likely cause a cache miss, and vice versa.</p>
+
+<h2 id="section-3-implementation-in-rust">Section 3: Implementation (in Rust)</h2>
+
+<h3 id="the-workload">The workload</h3>
+
+<p>The workload should cover two aspects: (1) it should be hard to predict in hardware (2) it should be easy to parallel.
+The easiest workload I can come up with are <strong>multiple linked lists</strong>, where each job individually traverse one linked list.</p>
+
+<p>To avoid cache line ping-pong and make sure every memory access is a cache miss, we pad each element to a cache line width.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#633820">#[repr(C)]</span>
+<span style="color:#633820">#[derive(Debug, Copy, Clone)]</span>
+<span style="color:#a90d91">pub</span> <span style="color:#a90d91">struct</span> <span style="color:#3f6e75">Cell</span> {
+    <span style="color:#000">next_index</span>: <span style="color:#a90d91">u64</span>,
+    <span style="color:#000">_padding</span>: [<span style="color:#a90d91">u64</span>; <span style="color:#1c01ce">7</span>],
+}
+
+<span style="color:#a90d91">impl</span> <span style="color:#000">Cell</span> {
+    <span style="color:#a90d91">pub</span> <span style="color:#a90d91">fn</span> <span style="color:#000">new</span>(<span style="color:#000">next_idx</span>: <span style="color:#a90d91">u64</span>) -&gt; <span style="color:#3f6e75">Self</span> {
+        <span style="color:#000">Cell</span> {
+            <span style="color:#000">next_index</span>: <span style="color:#3f6e75">next_idx</span>,
+            <span style="color:#000">_padding</span>: [<span style="color:#1c01ce">0</span>; <span style="color:#1c01ce">7</span>],
+        }
+    }
+    <span style="color:#a90d91">pub</span> <span style="color:#a90d91">fn</span> <span style="color:#000">set</span>(<span style="color:#000">&amp;</span><span style="color:#a90d91">mut</span> <span style="color:#5b269a">self</span>, <span style="color:#000">value</span>: <span style="color:#a90d91">u64</span>) {
+        <span style="color:#5b269a">self</span>.<span style="color:#000">next_index</span> <span style="color:#000">=</span> <span style="color:#000">value</span>;
+    }
+    <span style="color:#a90d91">pub</span> <span style="color:#a90d91">fn</span> <span style="color:#000">get</span>(<span style="color:#000">&amp;</span><span style="color:#5b269a">self</span>) -&gt; <span style="color:#a90d91">u64</span> {
+        <span style="color:#5b269a">self</span>.<span style="color:#000">next_index</span>
+    }
+}
+</code></pre></div>
+<p>Linked list nodes are often allocated from the heap, but we instead use an large <code>Cell</code> array to suppress the issues from the allocator.
+We then initialize the array to a linked list by inserting random shuffled values.
+<img src="/async/async-workload.png" alt="" /></p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#a90d91">pub</span> <span style="color:#a90d91">struct</span> <span style="color:#3f6e75">ArrayList</span> {
+    <span style="color:#a90d91">pub</span> <span style="color:#000">list</span>: <span style="color:#a90d91">Vec</span><span style="color:#000">&lt;</span><span style="color:#000">Cell</span><span style="color:#000">&gt;</span>,
+}
+
+<span style="color:#a90d91">impl</span> <span style="color:#000">ArrayList</span> {
+    <span style="color:#a90d91">pub</span> <span style="color:#a90d91">fn</span> <span style="color:#000">new</span>(<span style="color:#000">array_size</span>: <span style="color:#a90d91">usize</span>) -&gt; <span style="color:#3f6e75">Self</span> {
+        <span style="color:#a90d91">let</span> <span style="color:#a90d91">mut</span> <span style="color:#000">workload_list</span> <span style="color:#000">=</span> <span style="color:#000">ArrayList</span> {
+            <span style="color:#000">list</span>: <span style="color:#3f6e75">vec</span><span style="color:#000">!</span>[<span style="color:#000">Cell</span>::<span style="color:#000">new</span>(<span style="color:#1c01ce">0</span>); <span style="color:#000">array_size</span>],
+        };
+        <span style="color:#a90d91">let</span> <span style="color:#a90d91">mut</span> <span style="color:#000">temp_values</span>: <span style="color:#a90d91">Vec</span><span style="color:#000">&lt;</span><span style="color:#a90d91">u64</span><span style="color:#000">&gt;</span> <span style="color:#000">=</span> <span style="color:#a90d91">Vec</span>::<span style="color:#000">with_capacity</span>(<span style="color:#000">array_size</span> <span style="color:#000">-</span> <span style="color:#1c01ce">1</span>);
+        <span style="color:#a90d91">for</span> <span style="color:#000">i</span> <span style="color:#a90d91">in</span> <span style="color:#1c01ce">1</span>..<span style="color:#000">array_size</span> {
+            <span style="color:#000">temp_values</span>.<span style="color:#000">push</span>(<span style="color:#000">i</span> <span style="color:#a90d91">as</span> <span style="color:#a90d91">u64</span>);
+        }
+        <span style="color:#000">temp_values</span>.<span style="color:#000">shuffle</span>(<span style="color:#000">&amp;</span><span style="color:#a90d91">mut</span> <span style="color:#000">thread_rng</span>());
+
+        <span style="color:#a90d91">let</span> <span style="color:#a90d91">mut</span> <span style="color:#000">pre_idx</span> <span style="color:#000">=</span> <span style="color:#1c01ce">0</span>;
+        <span style="color:#a90d91">for</span> <span style="color:#000">elem</span> <span style="color:#a90d91">in</span> <span style="color:#000">temp_values</span>.<span style="color:#000">iter</span>() {
+            <span style="color:#000">workload_list</span>.<span style="color:#000">list</span>[<span style="color:#000">pre_idx</span>].<span style="color:#000">set</span>(<span style="color:#000">*</span><span style="color:#000">elem</span>);
+            <span style="color:#000">pre_idx</span> <span style="color:#000">=</span> <span style="color:#000">*</span><span style="color:#000">elem</span> <span style="color:#a90d91">as</span> <span style="color:#a90d91">usize</span>;
+        }
+        <span style="color:#000">workload_list</span>
+    }
+}
+</code></pre></div>
+<h3 id="baseline">Baseline</h3>
+
+<p>The base line implementation is quite simple: the reading thread traverse the linked lists.
+To verify the correctness, we ask the each job to accumulate all the values it reads,
+and we expect the total sum to match with the precomputed value.</p>
+
+<p>The following code implements the <code>Traveller</code> trait &ndash; a common interface for various such implementations.
+The code is quite simple and self-explanatory, yet it is the <strong>best possible implementation</strong> (without awkward code construction) for single thread executions.
+Also note that memory pre-fetching doesn&rsquo;t work here due to the irregular access pattern.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#a90d91">pub</span> <span style="color:#a90d91">struct</span> <span style="color:#3f6e75">SimpleTraversal</span>;
+
+<span style="color:#a90d91">impl</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span> <span style="color:#000">Traveller</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span> <span style="color:#a90d91">for</span> <span style="color:#000">SimpleTraversal</span> {
+    <span style="color:#a90d91">fn</span> <span style="color:#000">traverse</span>(<span style="color:#000">&amp;</span><span style="color:#a90d91">mut</span> <span style="color:#5b269a">self</span>, <span style="color:#000">workloads</span>: <span style="color:#a90d91">&amp;</span>[<span style="color:#000">ArrayList</span>; <span style="color:#000">GROUP_SIZE</span>]) -&gt; <span style="color:#a90d91">u64</span> {
+        <span style="color:#a90d91">let</span> <span style="color:#a90d91">mut</span> <span style="color:#000">sum</span>: <span style="color:#a90d91">u64</span> <span style="color:#000">=</span> <span style="color:#1c01ce">0</span>;
+        <span style="color:#a90d91">for</span> <span style="color:#000">workload</span> <span style="color:#a90d91">in</span> <span style="color:#000">workloads</span>.<span style="color:#000">iter</span>() {
+            <span style="color:#a90d91">let</span> <span style="color:#a90d91">mut</span> <span style="color:#000">pre_idx</span> <span style="color:#000">=</span> <span style="color:#1c01ce">0</span>;
+            <span style="color:#a90d91">for</span> <span style="color:#000">_i</span> <span style="color:#a90d91">in</span> <span style="color:#1c01ce">0</span>..<span style="color:#000">workload</span>.<span style="color:#000">list</span>.<span style="color:#000">len</span>() {
+                <span style="color:#a90d91">let</span> <span style="color:#000">value</span> <span style="color:#000">=</span> <span style="color:#000">workload</span>.<span style="color:#000">list</span>[<span style="color:#000">pre_idx</span>].<span style="color:#000">get</span>();
+                <span style="color:#000">pre_idx</span> <span style="color:#000">=</span> <span style="color:#000">value</span> <span style="color:#a90d91">as</span> <span style="color:#a90d91">usize</span>;
+                <span style="color:#000">sum</span> <span style="color:#000">+=</span> <span style="color:#000">value</span>;
+            }
+        }
+        <span style="color:#000">sum</span>
+    }
+
+    <span style="color:#a90d91">fn</span> <span style="color:#000">get_name</span>(<span style="color:#000">&amp;</span><span style="color:#5b269a">self</span>) -&gt; <span style="color:#a90d91">&amp;</span><span style="color:#a90d91">&#39;static</span> <span style="color:#a90d91">str</span> {
+        <span style="color:#c41a16">&#34;SimpleTraversal&#34;</span>
+    }
+
+    <span style="color:#a90d91">fn</span> <span style="color:#000">setup</span>(<span style="color:#000">&amp;</span><span style="color:#a90d91">mut</span> <span style="color:#5b269a">self</span>) {}
+}
+</code></pre></div>
+<h3 id="async-memory-access">Async memory access</h3>
+
+<p>Async implementation requires a bit more setup: (1) we need an executor (scheduler) which holds and executes the tasks,
+(2) we need to fill the executor will async state machines.
+The following code basically does those two things.</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#a90d91">pub</span> <span style="color:#a90d91">struct</span> <span style="color:#3f6e75">AsyncTraversal</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span> {
+    <span style="color:#000">executor</span>: <span style="color:#3f6e75">executor</span>::<span style="color:#000">Executor</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span>,
+}
+
+<span style="color:#a90d91">impl</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span> <span style="color:#000">Traveller</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span> <span style="color:#a90d91">for</span> <span style="color:#000">AsyncTraversal</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span> {
+    <span style="color:#a90d91">fn</span> <span style="color:#000">setup</span>(<span style="color:#000">&amp;</span><span style="color:#a90d91">mut</span> <span style="color:#5b269a">self</span>) {}
+
+    <span style="color:#a90d91">fn</span> <span style="color:#000">traverse</span>(<span style="color:#000">&amp;</span><span style="color:#a90d91">mut</span> <span style="color:#5b269a">self</span>, <span style="color:#000">workloads</span>: <span style="color:#a90d91">&amp;</span><span style="color:#836c28">&#39;a</span> [<span style="color:#000">ArrayList</span>; <span style="color:#000">GROUP_SIZE</span>]) -&gt; <span style="color:#a90d91">u64</span> {
+        <span style="color:#a90d91">for</span> <span style="color:#000">workload</span> <span style="color:#a90d91">in</span> <span style="color:#000">workloads</span>.<span style="color:#000">iter</span>() {
+            <span style="color:#5b269a">self</span>.<span style="color:#000">executor</span>
+                .<span style="color:#000">spawn</span>(<span style="color:#000">Task</span>::<span style="color:#000">new</span>(<span style="color:#000">AsyncTraversal</span>::<span style="color:#000">traverse_one</span>(<span style="color:#000">workload</span>)));
+        }
+        <span style="color:#5b269a">self</span>.<span style="color:#000">executor</span>.<span style="color:#000">run_ready_task</span>()
+    }
+
+    <span style="color:#a90d91">fn</span> <span style="color:#000">get_name</span>(<span style="color:#000">&amp;</span><span style="color:#5b269a">self</span>) -&gt; <span style="color:#a90d91">&amp;</span><span style="color:#a90d91">&#39;static</span> <span style="color:#a90d91">str</span> {
+        <span style="color:#c41a16">&#34;AsyncTraversal&#34;</span>
+    }
+}
+</code></pre></div>
+<p>The <code>traverse_one</code> function is very similar to the synchronous version.
+We, however, have two extra components: the code prefetching (line 7-12),
+and immediately task switch (line 13).
+We use the x86_64 instruction <code>_MM_HINT</code> for memory prefetching, where <code>T0</code> means fetching to L1 cache.
+We will discuss the <code>MemoryAccessFuture</code> in the later sections,
+it basically tells the scheduler that the current task should be scheduled out.</p>
+
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="display:block;width:100%;background-color:#e5e5e5"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span></span><span style="display:block;width:100%;background-color:#e5e5e5"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span></span><span style="display:block;width:100%;background-color:#e5e5e5"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span></span><span style="display:block;width:100%;background-color:#e5e5e5"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></span><span style="display:block;width:100%;background-color:#e5e5e5"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></span><span style="display:block;width:100%;background-color:#e5e5e5"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span></span><span style="display:block;width:100%;background-color:#e5e5e5"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span></span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#a90d91">impl</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span> <span style="color:#000">AsyncTraversal</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span> {
+    <span style="color:#000">async</span> <span style="color:#a90d91">fn</span> <span style="color:#000">traverse_one</span>(<span style="color:#000">workload</span>: <span style="color:#a90d91">&amp;</span><span style="color:#3f6e75">ArrayList</span>) -&gt; <span style="color:#a90d91">u64</span> {
+        <span style="color:#a90d91">let</span> <span style="color:#a90d91">mut</span> <span style="color:#000">pre_idx</span>: <span style="color:#a90d91">usize</span> <span style="color:#000">=</span> <span style="color:#1c01ce">0</span>;
+        <span style="color:#a90d91">let</span> <span style="color:#a90d91">mut</span> <span style="color:#000">sum</span>: <span style="color:#a90d91">u64</span> <span style="color:#000">=</span> <span style="color:#1c01ce">0</span>;
+
+        <span style="color:#a90d91">for</span> <span style="color:#000">_i</span> <span style="color:#a90d91">in</span> <span style="color:#1c01ce">0</span>..<span style="color:#000">workload</span>.<span style="color:#000">list</span>.<span style="color:#000">len</span>() {
+<span style="display:block;width:100%;background-color:#e5e5e5">            <span style="color:#a90d91">unsafe</span> {
+</span><span style="display:block;width:100%;background-color:#e5e5e5">                <span style="color:#000">_mm_prefetch</span>(
+</span><span style="display:block;width:100%;background-color:#e5e5e5">                    <span style="color:#000">&amp;</span><span style="color:#000">workload</span>.<span style="color:#000">list</span>[<span style="color:#000">pre_idx</span>] <span style="color:#a90d91">as</span> <span style="color:#000">*</span><span style="color:#a90d91">const</span> <span style="color:#000">Cell</span> <span style="color:#a90d91">as</span> <span style="color:#000">*</span><span style="color:#a90d91">const</span> <span style="color:#a90d91">i8</span>,
+</span><span style="display:block;width:100%;background-color:#e5e5e5">                    <span style="color:#000">_MM_HINT_T0</span>,
+</span><span style="display:block;width:100%;background-color:#e5e5e5">                );
+</span><span style="display:block;width:100%;background-color:#e5e5e5">            }
+</span><span style="display:block;width:100%;background-color:#e5e5e5">            <span style="color:#000">MemoryAccessFuture</span>::<span style="color:#000">new</span>().<span style="color:#000">await</span>;
+</span>            <span style="color:#a90d91">let</span> <span style="color:#000">value</span> <span style="color:#000">=</span> <span style="color:#000">workload</span>.<span style="color:#000">list</span>[<span style="color:#000">pre_idx</span>].<span style="color:#000">get</span>();
+            <span style="color:#000">pre_idx</span> <span style="color:#000">=</span> <span style="color:#000">value</span> <span style="color:#a90d91">as</span> <span style="color:#a90d91">usize</span>;
+            <span style="color:#000">sum</span> <span style="color:#000">+=</span> <span style="color:#000">value</span>;
+        }
+        <span style="color:#000">sum</span>
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div>
+
+<h3 id="scheduler-executor">Scheduler (executor)</h3>
+
+<p>The scheduler is the most interesting part.
+Unlike most other programming languages, where the language committee specifies an official runtime
+and the programmers have no ways to change it.
+The Rust decouples the async state machines with the schedulers, and allows programmers to chose whichever executors that fits best in their use case.
+This flexibility is extremely important to us, as we want to build our own lightweight executor that is tailored for the async memory access.</p>
+
+<p>The executor design is simple: it has four tasks slots, the execution cursor rotates around these tasks until all the tasks conclude.
+<img src="/async/async-executor.png" alt="" /></p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#a90d91">pub</span> <span style="color:#a90d91">struct</span> <span style="color:#3f6e75">Executor</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span> {
+    <span style="color:#000">task_queue</span>: [<span style="color:#a90d91">Option</span><span style="color:#000">&lt;</span><span style="color:#000">Task</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;&gt;</span>; <span style="color:#000">EXECUTOR_QUEUE_SIZE</span>],
+}
+
+<span style="color:#a90d91">impl</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span> <span style="color:#000">Executor</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span> {
+    <span style="color:#a90d91">pub</span> <span style="color:#a90d91">fn</span> <span style="color:#000">spawn</span>(<span style="color:#000">&amp;</span><span style="color:#a90d91">mut</span> <span style="color:#5b269a">self</span>, <span style="color:#000">task</span>: <span style="color:#3f6e75">Task</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;a</span><span style="color:#000">&gt;</span>) {
+        <span style="color:#a90d91">for</span> <span style="color:#000">i</span> <span style="color:#a90d91">in</span> <span style="color:#1c01ce">0</span>..<span style="color:#000">EXECUTOR_QUEUE_SIZE</span> {
+            <span style="color:#a90d91">if</span> <span style="color:#5b269a">self</span>.<span style="color:#000">task_queue</span>[<span style="color:#000">i</span>].<span style="color:#000">is_none</span>() {
+                <span style="color:#5b269a">self</span>.<span style="color:#000">task_queue</span>[<span style="color:#000">i</span>] <span style="color:#000">=</span> <span style="color:#a90d91">Some</span>(<span style="color:#000">task</span>);
+                <span style="color:#a90d91">return</span>;
+            }
+        }
+        <span style="color:#000">panic</span><span style="color:#000">!</span>(<span style="color:#c41a16">&#34;max executor queue reached!&#34;</span>);
+    }
+}
+</code></pre></div>
+<p>The executor will <code>poll</code> the tasks and check if they are ready to continue,
+we thus need to design a special task for async memory access.
+The idea is simple: return <code>ready</code> after a small period.
+Constructing a timer can be costly, we instead use a heuristic based approach:
+only when the executor asked us for a second time, we return <code>ready</code>, otherwise return <code>pending</code>.
+In rust code, this is as simple as:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-rust" data-lang="rust"><span style="color:#a90d91">pub</span> <span style="color:#a90d91">struct</span> <span style="color:#3f6e75">MemoryAccessFuture</span> {
+    <span style="color:#000">is_first_poll</span>: <span style="color:#a90d91">bool</span>,
+}
+
+<span style="color:#a90d91">impl</span> <span style="color:#000">Future</span> <span style="color:#a90d91">for</span> <span style="color:#000">MemoryAccessFuture</span> {
+    <span style="color:#a90d91">fn</span> <span style="color:#000">poll</span>(<span style="color:#a90d91">mut</span> <span style="color:#5b269a">self</span>: <span style="color:#3f6e75">Pin</span><span style="color:#000">&lt;&amp;</span><span style="color:#a90d91">mut</span> <span style="color:#000">Self</span><span style="color:#000">&gt;</span>, <span style="color:#000">_cx</span>: <span style="color:#a90d91">&amp;</span><span style="color:#3f6e75">mut</span> <span style="color:#000">Context</span><span style="color:#000">&lt;</span><span style="color:#836c28">&#39;_</span><span style="color:#000">&gt;</span>) -&gt; <span style="color:#3f6e75">Poll</span><span style="color:#000">&lt;</span><span style="color:#000">Self</span>::<span style="color:#000">Output</span><span style="color:#000">&gt;</span> {
+        <span style="color:#a90d91">if</span> <span style="color:#5b269a">self</span>.<span style="color:#000">is_first_poll</span> {
+            <span style="color:#5b269a">self</span>.<span style="color:#000">is_first_poll</span> <span style="color:#000">=</span> <span style="color:#a90d91">false</span>;
+            <span style="color:#000">Poll</span>::<span style="color:#000">Pending</span>
+        } <span style="color:#a90d91">else</span> {
+            <span style="color:#000">Poll</span>::<span style="color:#000">Ready</span>(())
+        }
+    }
+}
+</code></pre></div>
+<h3 id="the-rust-lang">The Rust lang</h3>
+
+<p>So far we have covered all the essential code to implement an feature complete async memory access benchmark.
+Obviously I omitted quite a lot technical details and some engineering tricks,
+the full code is available at the <a href="https://github.com/XiangpengHao/async_bench">GitHub repo</a>.</p>
+
+<p>Before we continue to the experiments and benchmark section, I would like to share some thoughts on the rust language.</p>
+
+<p>From my perspective, rust is better than c++ in almost every aspects.
+System programming is difficult, it often needs to deal with the most challenging and error prone problems,
+such as concurrency and crash consistency.
+C++ is not only bad at handling these issues, but also deceptively easy to write incorrect code.
+It feels like this language is encouraging you to make the complex problem even more chaotic.
+Coding in rust feels the opposite way.
+The compiler forces you to think thoroughly before making any decisions:
+you need to carefully think about heap allocation, nullable, lifetime and concurrency.</p>
+
+<h2 id="section-4-benchmark">Section 4: Benchmark</h2>
+
+<p>The following figure shows the performance of async vs sync.
+We can see the async version is about 4x faster than the sync version &ndash; remember our queue size is exactly four.
+This indicates that the majority of the synchronous time is wasted on the memory stall,
+which is the main selling point of async memory access.
+<img src="/async/perf1.png" alt="" /></p>
+
+<p>Switching tasks, however, comes with costs, especially when the memory is already in the cache.
+As shown in the following figure, where the array size is relatively small and all the workloads can fit into the CPU cache.
+In this case, async memory access is a lot slower than the sequential access.
+<img src="/async/perf2.png" alt="" /></p>
+
+<p>I omitted a lot of detailed benchmark as most of them are boring.
+But here are some takeaway messages:
+(1) spawning four tasks generally takes only 200ns, i.e. same as a persistent memory access.
+(2) switching from one task to the other takes about 30ns, which is one third time of a DRAM cache miss.
+(3) the overhead depends on the executor implementation and of course the cache fetch heuristic.</p>
+
+<h2 id="section-5-discussion">Section 5: Discussion</h2>
+
+<p>In this section, I try to answer this question: how can we use async memory access to accelerate my application.</p>
+
+<p><strong>The iron curtain between synchronous world and asynchronous world.</strong>
+Although async programming achieved far better programmability than the batch/group processing,
+the line between async and sync is still clear and unbreakable.
+One single job can not benefit from async execution, in fact it will strictly slow down each individual task,
+because task switching is pure overhead.
+Only when we measure the performance of a whole system, e.g. the throughput of a web server,
+can we see the performance improvements.</p>
+
+<p>The question is that what if we want to accelerate a small component of a big synchronous system?
+This question is equivalent to &ldquo;how to accelerate the component using multi-threading?&rdquo;
+One can argue that coroutine is much more efficient and can have a lot more opportunities,
+but the core problem here is <strong>task partition</strong>.
+We don&rsquo;t really have enough problems that have the natural parallel construction like our mini benchmark.
+In a lot more practical cases, the problem we are facing is how to accelerate a single linked list traversal,
+where memory prefetch doesn&rsquo;t work and every memory access has chained dependency.</p>
+
+<p>Before we get too pessimistic about coroutine, I would argue that at least coroutine is one small step further towards
+<strong>fine grained partition</strong>.
+It enables a new possible scenario: a single thread task trying to scan over an unsorted array of 100 elements.
+Spawning four threads must be too costly to cover the context switch cost, while spawning four coroutine can be definitely worth trying.</p>
+
+<p>A possible concern is that <strong>how can the programmer tell these 100 elements are not in the cache?</strong>
+Programmers need to guess.
+This solution is a double-edged sword: on the one hand, incorporate high level semantics to guess cache miss can achieve high accuracy;
+on the other hand, it also means there&rsquo;s no transparent solution for async memory access.
+This is the sword of damocles of async memory access, until we have some way from the hardware to predict a cache miss.</p>
+
+<p>Some may argue that if we build a new parallel system (e.g. a web server) from scratch &ndash; targeted async runtime on the day one &ndash; we no longer need to worry about task partition.
+This indeed is a reasonable use case, but we can still encounter some problems.
+A general purpose scheduler might significantly differ from a dedicated async memory access scheduler.
+It&rsquo;s way more complex and thus has way higher context switch cost.
+We can not mix these schedulers and we can not afford the overhead.</p>
+
+<p>My last paragraph will discuss one unexpected benefit of async memory access: concurrent without concurrency control.
+There will be only one task running at any time, futhermore, tasks has its full control on when to hand back the execution.
+This means that a running coroutine task is similar to a running thread with OS interrupt disabled:
+no any other task (thread) can touch its data.
+How this property can simplify the programming model is not well understood, but it definitely shows big potentials.</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">Exploiting Coroutines to Attack the “Killer Nanoseconds”
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:2">Asynchronous memory access chaining.
+ <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+      
+    </div>
+    
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p><a href="https://www.haoxp.xyz">Xiangpeng Hao</a> 2020</p>
+    
+  </div>
+</section>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-66103952-7', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+</body>
+</html>
+

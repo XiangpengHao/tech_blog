@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  lang="en-us" >
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+    <title>Resource Disaggregation | Xiangpeng Hao</title>
+     <meta property='og:title' content='Resource Disaggregation - Xiangpeng Hao'>
+<meta property='og:description' content='This post is less of a paper review but more of some random thoughts about resources disaggregation.
+The two papers are &ldquo;Understanding the Effect of Data Center Resource Disaggregation on Production DBMSs&rdquo; and &ldquo;Rethinking Data Management Systems for Disaggregated Data Centers&rdquo;. The paper are easy to follow and educational, I learned a lot from them.
+What is resource disaggregation? Hardware resources (CPU, main memory, GPU, SSD, HDD) are split into independently managed pools that are connected by a high-performance network fabric.'>
+<meta property='og:url' content='/posts/resource-disaggregation/'>
+<meta property='og:site_name' content='Xiangpeng Hao'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts'><meta property='article:published_time' content='2020-06-20T12:20:42-07:00'/><meta property='article:modified_time' content='2020-06-20T12:20:42-07:00'/><meta name='twitter:card' content='summary'><meta name='twitter:site' content='@'><meta name='twitter:creator' content='@'>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="shortcut icon" href="favicon.png" /></head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="/"><h1 class="title is-4">Xiangpeng Hao</h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile"><a class="level-item" href='https://haoxp.xyz' target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <g transform="scale(0.042)" stroke-width="4">
+        <path fill="currentColor"
+            d="M528 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h480c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm0 400H48V80h480v352zM208 256c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm-89.6 128h179.2c12.4 0 22.4-8.6 22.4-19.2v-19.2c0-31.8-30.1-57.6-67.2-57.6-10.8 0-18.7 8-44.8 8-26.9 0-33.4-8-44.8-8-37.1 0-67.2 25.8-67.2 57.6v19.2c0 10.6 10 19.2 22.4 19.2zM360 320h112c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8H360c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8zm0-64h112c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8H360c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8zm0-64h112c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8H360c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8z">
+        </path>
+        
+    </g>
+    
+</svg></i>
+            </span>
+          </a><a class="level-item" href='https://github.com/XiangpengHao' target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+    
+</svg></i>
+            </span>
+          </a><a class="level-item" href='https://linkedin.com/in/hao-xiangpeng' target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path stroke-width="1.8"
+        d="m5.839218,4.101561c0,1.211972 -0.974141,2.194011 -2.176459,2.194011s-2.176459,-0.982039 -2.176459,-2.194011c0,-1.211094 0.974141,-2.194011 2.176459,-2.194011s2.176459,0.982917 2.176459,2.194011zm0.017552,3.94922l-4.388022,0l0,14.04167l4.388022,0l0,-14.04167zm7.005038,0l-4.359939,0l0,14.04167l4.360816,0l0,-7.370999c0,-4.098413 5.291077,-4.433657 5.291077,0l0,7.370999l4.377491,0l0,-8.89101c0,-6.915523 -7.829986,-6.66365 -9.669445,-3.259423l0,-1.891237z" />
+    
+</svg></i>
+            </span>
+          </a><a class="level-item" href='https://blog.haoxp.xyz/index.xml' target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <g transform="scale(0.045)" stroke-width="40">
+        <path
+            d="M128.081 415.959c0 35.369-28.672 64.041-64.041 64.041S0 451.328 0 415.959s28.672-64.041 64.041-64.041 64.04 28.673 64.04 64.041zm175.66 47.25c-8.354-154.6-132.185-278.587-286.95-286.95C7.656 175.765 0 183.105 0 192.253v48.069c0 8.415 6.49 15.472 14.887 16.018 111.832 7.284 201.473 96.702 208.772 208.772.547 8.397 7.604 14.887 16.018 14.887h48.069c9.149.001 16.489-7.655 15.995-16.79zm144.249.288C439.596 229.677 251.465 40.445 16.503 32.01 7.473 31.686 0 38.981 0 48.016v48.068c0 8.625 6.835 15.645 15.453 15.999 191.179 7.839 344.627 161.316 352.465 352.465.353 8.618 7.373 15.453 15.999 15.453h48.068c9.034-.001 16.329-7.474 16.005-16.504z">
+        </path>
+    </g>
+    
+    
+</svg></i>
+            </span>
+          </a><a class="level-item" href='https://t.me/newsathlh' target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path
+        d="m 22.05,1.577 c -0.393,-0.016 -0.784,0.08 -1.117,0.235 -0.484,0.186 -4.92,1.902 -9.41,3.64 C 9.263,6.325 7.005,7.198 5.267,7.867 3.53,8.537 2.222,9.035 2.153,9.059 c -0.46,0.16 -1.082,0.362 -1.61,0.984 -0.79581202,1.058365 0.21077405,1.964825 1.004,2.499 1.76,0.564 3.58,1.102 5.087,1.608 0.556,1.96 1.09,3.927 1.618,5.89 0.174,0.394 0.553,0.54 0.944,0.544 l -0.002,0.02 c 0,0 0.307,0.03 0.606,-0.042 0.3,-0.07 0.677,-0.244 1.02,-0.565 0.377,-0.354 1.4,-1.36 1.98,-1.928 l 4.37,3.226 0.035,0.02 c 0,0 0.484,0.34 1.192,0.388 0.354,0.024 0.82,-0.044 1.22,-0.337 0.403,-0.294 0.67,-0.767 0.795,-1.307 0.374,-1.63 2.853,-13.427 3.276,-15.38 L 23.676,4.725 C 23.972,3.625 23.863,2.617 23.18,2.02 22.838,1.723 22.444,1.593 22.05,1.576 Z" />
+    
+</svg></i>
+            </span>
+          </a></nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="subtitle is-6 is-pulled-right">
+      
+    </div>
+    <h2 class="subtitle is-6">June 20, 2020</h2>
+    <h1 class="title">Resource Disaggregation</h1>
+    
+    <div class="content">
+      
+
+<p>This post is less of a paper review but more of some random thoughts about resources disaggregation.</p>
+
+<p>The two papers are &ldquo;Understanding the Effect of Data Center Resource Disaggregation on Production DBMSs&rdquo; and
+&ldquo;Rethinking Data Management Systems for Disaggregated Data Centers&rdquo;.
+The paper are easy to follow and educational, I learned a lot from them.</p>
+
+<h3 id="what-is-resource-disaggregation">What is resource disaggregation?</h3>
+
+<p>Hardware resources (CPU, main memory, GPU, SSD, HDD) are split into independently managed pools that are connected by a high-performance network fabric.</p>
+
+<h3 id="the-motivation-behind-resource-disaggregation">The motivation behind resource disaggregation?</h3>
+
+<p>Cloud computing drives this trend because they have the following business need:
+1. To upgrade and expand each resources independently.
+If the workload changes to require additional CPUs, the operator can deploy new compute nodes without needing to upgrade memory nodes or worry about the compatibility.
+2. To promote efficient resource utilization and prevents fragmentation.
+For example, if a customer requests an unusual hardware configuration &ndash; such as 7 cores, 100 GB RAM, 3 GPUs &ndash;
+the operator can allocate those resources without committing an over-provisioned machine.</p>
+
+<h3 id="what-are-the-benefits">What are the benefits?</h3>
+
+<ol>
+<li>Independent expansion.</li>
+<li>Independent failure.
+I&rsquo;m a bit concerned with this claim. It&rsquo;s intuitive and relatively easy to recover a storage node or even memory node,
+but I don&rsquo;t believe it&rsquo;s possible to recover from a CPU node failure.
+For example, what if the CPU node was holding a lock before it fails, the only safe way (on top of my mind) is to abort all other CPU nodes.</li>
+<li>Independent allocation.</li>
+</ol>
+
+<h3 id="new-challenges">New challenges?</h3>
+
+<ol>
+<li>Now we have two &ndash; instead of one &ndash; memory sets, the local memory of a computing node and the remote memory from memory pool.
+This new layer of indirection is new to all existing DBMSs.</li>
+<li>The memory is significantly slower, as they are on network.
+To make things worse, this is not a distributed system where our solution is to minimize remote communication.
+In the disaggregated environment, accessing the remote memory is a necessity rather than an optimization.
+In other words, our mental mode is not to think about minimizing remote memory access, but to consider how to manage our working set more smartly.</li>
+<li>How to handle the independent fails?</li>
+</ol>
+
+<h3 id="hows-the-performance-if-we-do-nothing">Hows the performance if we do nothing?</h3>
+
+<p>The paper benchmarked MonetDB (in-memory) and PostgreSQL (out-of-core) on LegOS (the state-of-the-art resource disaggregation operating system) with TPC-H benchmark.
+From the paper description, we can infer the LegOS is more of a research prototype rather than a highly-optimized production operation system.
+1. MonetDB is about 1.7x slower with 4GB memory on compute nodes
+2. PostgreSQL is about 2x slower on hot execution while similar performance on cold execution.</p>
+
+<p>The performance bottleneck is apparently the remote memory access via network.</p>
+
+<h3 id="are-the-benefits-outweigh-the-costs">Are the benefits outweigh the costs?</h3>
+
+<p>Under the context of DBMS, we only consider three different resources: CPU, main memory and SSD.
+The benefits comes from the fact that these components are physically independent while the cost mainly comes from remote main memory access.</p>
+
+<p>So the question is that are we paying too much for <strong>memory disaggregation</strong>?
+I have no doubt that storage/GPU disaggregation can have negligible performance overhead if we try hard,
+but I&rsquo;m conservative about memory disaggregation &ndash; not only about its current performance,
+but also doubt that we can get around with this overhead.</p>
+
+<h3 id="an-end-to-end-view">An end-to-end view</h3>
+
+<p>New architecture changes try to be transparent to existing applications (so that people can adopt it with minimal efforts),
+but sometimes they shouldn&rsquo;t, especially for performance critical applications &ndash;
+where platform agnostic is just unrealistic claim.</p>
+
+<p>So what to keep in mind when designing cloud native applications?
+1. Storage: we can assume storage is replicated.
+&gt; In Aurora, durable redo record application happens at the storage tier, continuously, asynchronously, and distributed across the fleet. Any read request for a data page may require some redo records to be applied if the page is not current. As a result, the process of crash recovery is spread across all normal foreground processing. Nothing is required at database startup.
+2. Memory is slow and hierarchical: local DRAM is smaller but faster than remote DRAM.
+It sounds like NUMA but not exactly.</p>
+
+<h3 id="a-view-on-the-evolution">A view on the evolution</h3>
+
+<p>I&rsquo;m not convinced that memory disaggregation will be widely adopted anytime soon.
+The motivation of memory disaggregation is just not as strong as other components:
+1. It&rsquo;s common to have hundreds GBs of memory in a bare-metal server.
+Cloud operators can easily configure the resource in software.
+2. Memory is cheap, especially the new persistent memory.</p>
+
+      
+    </div>
+    
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p><a href="https://www.haoxp.xyz">Xiangpeng Hao</a> 2020</p>
+    
+  </div>
+</section>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-66103952-7', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+</body>
+</html>
+

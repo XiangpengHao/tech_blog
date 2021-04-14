@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  lang="en-us" >
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+    <title>Unaligned mmap can decrease performance, and the lessons learned | Xiangpeng Hao</title>
+     <meta property='og:title' content='Unaligned mmap can decrease performance, and the lessons learned - Xiangpeng Hao'>
+<meta property='og:description' content='Several days ago I was told a mysterious bug: the performance of our new data structure is unstable across different benchmark execution, specifically, the throughput fluctuates from 1x to 10x. Further investment shows that the root cause comes from uncommonly high page faults.
+There&rsquo;s a long journey to find out the real problem, yet the conclusion is simple:
+Unaligned mmap address can significantly decrease the performance, but it&#39;s deceptively easy to mmap an unaligned address, especially for persistent memory.'>
+<meta property='og:url' content='/posts/mmap-performance/'>
+<meta property='og:site_name' content='Xiangpeng Hao'>
+<meta property='og:type' content='article'><meta property='article:section' content='Posts'><meta property='article:published_time' content='2020-01-25T14:31:39-08:00'/><meta property='article:modified_time' content='2020-01-25T14:31:39-08:00'/><meta name='twitter:card' content='summary'><meta name='twitter:site' content='@'><meta name='twitter:creator' content='@'>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="shortcut icon" href="favicon.png" /></head>
+
+<body>
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="/"><h1 class="title is-4">Xiangpeng Hao</h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile"><a class="level-item" href='https://haoxp.xyz' target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <g transform="scale(0.042)" stroke-width="4">
+        <path fill="currentColor"
+            d="M528 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h480c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm0 400H48V80h480v352zM208 256c35.3 0 64-28.7 64-64s-28.7-64-64-64-64 28.7-64 64 28.7 64 64 64zm-89.6 128h179.2c12.4 0 22.4-8.6 22.4-19.2v-19.2c0-31.8-30.1-57.6-67.2-57.6-10.8 0-18.7 8-44.8 8-26.9 0-33.4-8-44.8-8-37.1 0-67.2 25.8-67.2 57.6v19.2c0 10.6 10 19.2 22.4 19.2zM360 320h112c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8H360c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8zm0-64h112c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8H360c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8zm0-64h112c4.4 0 8-3.6 8-8v-16c0-4.4-3.6-8-8-8H360c-4.4 0-8 3.6-8 8v16c0 4.4 3.6 8 8 8z">
+        </path>
+        
+    </g>
+    
+</svg></i>
+            </span>
+          </a><a class="level-item" href='https://github.com/XiangpengHao' target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+    
+</svg></i>
+            </span>
+          </a><a class="level-item" href='https://linkedin.com/in/hao-xiangpeng' target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path stroke-width="1.8"
+        d="m5.839218,4.101561c0,1.211972 -0.974141,2.194011 -2.176459,2.194011s-2.176459,-0.982039 -2.176459,-2.194011c0,-1.211094 0.974141,-2.194011 2.176459,-2.194011s2.176459,0.982917 2.176459,2.194011zm0.017552,3.94922l-4.388022,0l0,14.04167l4.388022,0l0,-14.04167zm7.005038,0l-4.359939,0l0,14.04167l4.360816,0l0,-7.370999c0,-4.098413 5.291077,-4.433657 5.291077,0l0,7.370999l4.377491,0l0,-8.89101c0,-6.915523 -7.829986,-6.66365 -9.669445,-3.259423l0,-1.891237z" />
+    
+</svg></i>
+            </span>
+          </a><a class="level-item" href='https://blog.haoxp.xyz/index.xml' target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <g transform="scale(0.045)" stroke-width="40">
+        <path
+            d="M128.081 415.959c0 35.369-28.672 64.041-64.041 64.041S0 451.328 0 415.959s28.672-64.041 64.041-64.041 64.04 28.673 64.04 64.041zm175.66 47.25c-8.354-154.6-132.185-278.587-286.95-286.95C7.656 175.765 0 183.105 0 192.253v48.069c0 8.415 6.49 15.472 14.887 16.018 111.832 7.284 201.473 96.702 208.772 208.772.547 8.397 7.604 14.887 16.018 14.887h48.069c9.149.001 16.489-7.655 15.995-16.79zm144.249.288C439.596 229.677 251.465 40.445 16.503 32.01 7.473 31.686 0 38.981 0 48.016v48.068c0 8.625 6.835 15.645 15.453 15.999 191.179 7.839 344.627 161.316 352.465 352.465.353 8.618 7.373 15.453 15.999 15.453h48.068c9.034-.001 16.329-7.474 16.005-16.504z">
+        </path>
+    </g>
+    
+    
+</svg></i>
+            </span>
+          </a><a class="level-item" href='https://t.me/newsathlh' target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path
+        d="m 22.05,1.577 c -0.393,-0.016 -0.784,0.08 -1.117,0.235 -0.484,0.186 -4.92,1.902 -9.41,3.64 C 9.263,6.325 7.005,7.198 5.267,7.867 3.53,8.537 2.222,9.035 2.153,9.059 c -0.46,0.16 -1.082,0.362 -1.61,0.984 -0.79581202,1.058365 0.21077405,1.964825 1.004,2.499 1.76,0.564 3.58,1.102 5.087,1.608 0.556,1.96 1.09,3.927 1.618,5.89 0.174,0.394 0.553,0.54 0.944,0.544 l -0.002,0.02 c 0,0 0.307,0.03 0.606,-0.042 0.3,-0.07 0.677,-0.244 1.02,-0.565 0.377,-0.354 1.4,-1.36 1.98,-1.928 l 4.37,3.226 0.035,0.02 c 0,0 0.484,0.34 1.192,0.388 0.354,0.024 0.82,-0.044 1.22,-0.337 0.403,-0.294 0.67,-0.767 0.795,-1.307 0.374,-1.63 2.853,-13.427 3.276,-15.38 L 23.676,4.725 C 23.972,3.625 23.863,2.617 23.18,2.02 22.838,1.723 22.444,1.593 22.05,1.576 Z" />
+    
+</svg></i>
+            </span>
+          </a></nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="subtitle is-6 is-pulled-right">
+      
+    </div>
+    <h2 class="subtitle is-6">January 25, 2020</h2>
+    <h1 class="title">Unaligned mmap can decrease performance, and the lessons learned</h1>
+    
+    <div class="content">
+      
+
+<p>Several days ago I was told a mysterious bug:
+the performance of our new data structure is unstable across different benchmark execution, specifically, the throughput fluctuates from 1x to 10x.
+Further investment shows that the root cause comes from uncommonly high page faults.</p>
+
+<p>There&rsquo;s a long journey to find out the real problem, yet the conclusion is simple:</p>
+
+<div style="font-weight: 700"> Unaligned mmap address can significantly decrease the performance, but it's deceptively easy to mmap an unaligned address, especially for persistent memory.</div>
+
+<h2 id="section-1-unaligned-mmap-decrease-performance">Section 1: Unaligned mmap decrease performance</h2>
+
+<p>Linux <code>mmap</code> will by default align to 4KB, as specified by the system page size.</p>
+
+<p>The persistent memory, however, once <a href="https://pmem.io/2018/05/15/using_persistent_memory_devices_with_the_linux_device_mapper.html">properly configured</a>, is aligned to 2MB to leverage the huge pages.</p>
+
+<p>In other words, if your persistent memory is mapped to a 4KB memory boundary (instead of 2MB), you&rsquo;ll likely to get tremendous extra page faults.</p>
+
+<h5 id="unaligned-case">Unaligned case</h5>
+
+<p>Consider the following pseudocode, where the <code>mmap</code> address is NOT aligned to 2MB:</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#177500">// mmap pool address aligned to 4KB but not 2MB
+</span><span style="color:#177500"></span><span style="color:#000">uint64_t</span> <span style="color:#000">pool_addr</span> <span style="color:#000">=</span> <span style="color:#1c01ce">0x5ff600010000</span>;
+<span style="color:#000">pm_pool</span> <span style="color:#000">=</span> <span style="color:#000">pmemobj_create</span>(<span style="color:#000">pool_addr</span>);
+
+<span style="color:#a90d91">auto</span> <span style="color:#000">ret</span> <span style="color:#000">=</span> <span style="color:#000">pmemobj_zalloc</span>(<span style="color:#000">pm_pool</span>, <span style="color:#1c01ce">10</span><span style="color:#000">GB</span>);
+<span style="color:#000">pmemobj_memset</span>(<span style="color:#000">pm_pool</span>, <span style="color:#1c01ce">10</span><span style="color:#000">GB</span>);
+</code></pre></div>
+<p>Run the code and collect the <code>perf</code> result:</p>
+
+<pre><code>     6,541,432,706      cycles:u                                                    
+       952,076,754      instructions:u            #    0.15  insn per cycle         
+           480,752      cache-references:u                                          
+           280,847      cache-misses:u            #   58.418 % of all cache refs    
+        78,309,630      bus-cycles:u                                                
+         1,324,482      page-faults:u   
+</code></pre>
+
+<h5 id="aligned-case">Aligned case</h5>
+
+<p>Now the <code>mmap</code> address is aligned to 2MB (note the only difference in <code>pool_addr</code>):</p>
+<div class="highlight"><pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#177500">// mmap pool address aligned to 2MB
+</span><span style="color:#177500"></span><span style="color:#000">uint64_t</span> <span style="color:#000">pool_addr</span> <span style="color:#000">=</span> <span style="color:#1c01ce">0x5ff600000000</span>;
+<span style="color:#000">pm_pool</span> <span style="color:#000">=</span> <span style="color:#000">pmemobj_create</span>(<span style="color:#000">pool_addr</span>);
+
+<span style="color:#a90d91">auto</span> <span style="color:#000">ret</span> <span style="color:#000">=</span> <span style="color:#000">pmemobj_zalloc</span>(<span style="color:#000">pm_pool</span>, <span style="color:#1c01ce">10</span><span style="color:#000">GB</span>);
+<span style="color:#000">pmemobj_memset</span>(<span style="color:#000">pm_pool</span>, <span style="color:#1c01ce">10</span><span style="color:#000">GB</span>);
+</code></pre></div>
+<p>Run the code and collect the <code>perf</code> result (compare the page-faults with the previous one):</p>
+
+<pre><code>     5,295,333,275      cycles:u                                                    
+       950,777,762      instructions:u            #    0.18  insn per cycle         
+           107,143      cache-references:u                                          
+            41,122      cache-misses:u            #   38.380 % of all cache refs    
+        63,091,836      bus-cycles:u                                                
+            16,319      page-faults:u    
+</code></pre>
+
+<h5 id="conclusion">Conclusion</h5>
+
+<ol>
+<li>It&rsquo;s obvious that unaligned <code>mmap</code> can cause serious performance degrade on persistent memory.</li>
+<li>There&rsquo;s no error, no warning, just transparently caused two orders of more page faults.</li>
+<li>There is one indicator, though. When inspecting the <code>htop</code>, there&rsquo;re are some dubious cross-socket memory access even if all threads are bind to one socket. The reason is still unknown to me (only some guesses).</li>
+</ol>
+
+<h2 id="section-2-mmap-is-unaware-of-persistent-memory-alignment">Section 2: mmap is unaware of persistent memory alignment</h2>
+
+<p>Now people might think it&rsquo;s ok as long as an 2MB-aligned address is passed <code>mmap</code>, this is not always true.
+For most <code>mmap</code> usage, the address is just a hint, the <code>mmap</code> will try its best to map the memory to that address.</p>
+
+<p>However, it can fail in the following two cases:</p>
+
+<ol>
+<li>Virtual address occupied. It&rsquo;s very straight-forward that if the specified memory address region is occupied (by other allocation), the <code>mmap</code> will definitely fail.</li>
+<li>The specified address crossed the allowed boundary. This is less known to most people:
+user space address occupies the lower address, while kernel space address uses the higher address.
+And user space address is not allowed to cross that boundary (<code>0x00007fffffffffff</code> for 4-level page tables, <a href="https://www.kernel.org/doc/Documentation/x86/x86_64/mm.txt">reference</a>).</li>
+</ol>
+
+<p>In the previously mentioned bug, I specified the address as <code>0x00007ff700000000</code>, for the reason mentioned above,
+this address is not enough to map a pool with size of 200GB, but ok with 20GB pools in my tests.</p>
+
+<div style="font-weight: 700">The mmap will then fallback to find a lower address, however, it does NOT aware of the persistent memory alignment, and ended up mapping to a 4KB aligned address, thus caused the mis-alignment.</div>
+
+<h2 id="section-3-lessons-learned-takeaways">Section 3: Lessons learned, takeaways</h2>
+
+<ol>
+<li><p>Cross-socket memory access and high page fault rate is probably caused by memory page mis-alignment.</p></li>
+
+<li><p>The original PMDK will always return a 2MB aligned address, the Intel guys obviously aware of this trap.
+In my fork of PMDK, I added a feature to allow users to specify the address, but most users (including me) didn&rsquo;t know the implications of provided address.</p></li>
+
+<li><p>Tests do not always help. During my tests, I always map 20GB of memory and tested it works,
+my mindset was 20GB memory should be more than enough. But in real life, we did use 200GB memory within a single process (crazy).</p></li>
+
+<li><p>I&rsquo;ll expect far more these bugs in the future systems as we integrate the persistent memory more into our system.
+The different alignments, significantly more memory consumption and safe persistency etc will silently break a lot of assumptions. We thus need to be extremely careful, and think critically.</p></li>
+</ol>
+
+      
+    </div>
+    
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p><a href="https://www.haoxp.xyz">Xiangpeng Hao</a> 2020</p>
+    
+  </div>
+</section>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-66103952-7', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+</body>
+</html>
+
