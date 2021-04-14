@@ -4,8 +4,6 @@ date: 2020-02-06T13:51:49-08:00
 draft: false 
 ---
 
-Among all the ill-designed system calls, `mmap` is probably the worst and the most out-of-control one.
-
 ### The theory
 
 Before I discuss about today's bug, here's a little bit background: https://lwn.net/Articles/758594/

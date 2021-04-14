@@ -1,7 +1,7 @@
 ---
 title: "Advanced Git Cheatsheet"
 date: 2018-03-17T11:20:53-07:00
-draft: false
+draft: true 
 ---
 
 In this post, I'll cover some advanced git operations. The philosophy is to keep you git history clean and intuitive.

@@ -1,7 +1,7 @@
 ---
 title: "Research Diary"
 date: 2019-06-26T19:26:19-07:00
-draft: false
+draft: true 
 ---
 
 听说写 research diary 可以有种种好处（虽然并没有人能坚持下来），但我的朋友们突然开始写 research diary，如果我不写就输了，这是主要 motivation.

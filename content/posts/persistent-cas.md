@@ -1,7 +1,7 @@
 ---
 title: "The case of Persistent CAS"
 date: 2019-11-02T12:18:02-07:00
-draft: false
+draft: true 
 ---
 
 There are numerous paper talking about persistent memory data structures, some of them claimed excellent performance, others support (near) instant recovery.

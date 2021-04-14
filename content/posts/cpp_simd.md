@@ -1,7 +1,7 @@
 ---
 title: "Tutorial: SIMD in C++ "
 date: 2019-05-19T22:54:49-07:00
-draft: false 
+draft: true 
 ---
 
 ## SIMD Background

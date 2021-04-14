@@ -1,7 +1,7 @@
 ---
 title: "Research Diary Week 3"
 date: 2019-07-12T12:08:58-07:00
-draft: false 
+draft: true 
 ---
 
 ### July 21th

@@ -1,7 +1,7 @@
 ---
 title: "Concurrent consistency is NOT crash consistency!"
 date: 2019-10-29T16:22:37-07:00
-draft: false
+draft: true 
 ---
 And converting a concurrent-consistent data structure to a crash-consistent one needs non-trivial efforts.  
 

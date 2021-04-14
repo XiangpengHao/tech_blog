@@ -88,6 +88,12 @@ particle acceleration in a structure loaded vaccum</div>
 <div class = "dono">As we can see from Figure 2, if the return kinetic energy is less than 3.2 Up, there will be two electron trajectories associated with this kinetic energy.</div>
 <div class = "do">Figure 2 shows that a return kinetic energy less than 3.2Up yeilds two electron trajectories.</div>
 
+<div class="dono"> <b>There are</b> many ways in which we can arrange the pulleys.</div>
+
+<div class="do">We can arrange the pulleys in many ways.</div>
+
+
+
 <div class = "dono"></div>
 <div class = "do"></div>
 
@@ -112,12 +118,6 @@ particle acceleration in a structure loaded vaccum</div>
 - Not harmful - safe
 - Does not have - lacks
 - Did not pay attention to - ignored
-
-#### Eliminate there are/there is
-<div class="dono"> <b>There are</b> many ways in which we can arrange the pulleys.</div>
-
-<div class="do">We can arrange the pulleys in many ways.</div>
-
 
 #### Use active voice
 <div class="dono">The activation of Ca++ channel <b>is induced by</b> the depletion of endoplasmic reticulum Ca++ stores.</div>
@@ -154,3 +154,95 @@ Use the dash to add emphasis or to insert an abrupt definition or description al
 The drugs did more than prevent new fat accumulation.
 They also triggered overweight mice to shed significant amounts of fat <b>-- up to half their body weight</b>.
 </div>
+
+#### Use strong verbs
+<div class = "do">The WHO reports that approximately two-thirds of the world's diabetics are found in developing countries,
+and estimates that the number of diabetics in these countries will double in the next 25 years.</div>
+<div class = "dono">
+The WHO estimates that two-thirds of the world's diabetics are found in developing countries,
+and projects that the number of diabetics in these countries will double in the next 25 years.</div>
+
+#### Don't burry the main verbs
+<div class = "do">
+The fear expressed by some teachers that students would not learn statistics well if they were permitted to use canned computer programs has not been realized in our experience.  A careful monitoring of achievement levels before and after the introduction of computers in the teaching of our course revealed no appreciable change in students’ performances.</div>
+<div class = "dono">
+Many teacher feared that using of canned computer programs would prevent student from learning statistics.
+We monitored the achivement levels before and after we introducing computers in our course, and found no detriments in performances.
+</div>
+
+<div class = "do">
+Review of each center’s progress in recruitment is important to ensure that the cost involved in maintaining each center’s participation is worthwhile.</div>
+<div class = "dono">
+We should review each center's recruitment progress to ensure the its continued participation is cost effective.
+</div>
+
+<div class = "do">
+It should be emphasized that these proportions generally are not the result of significant increases in moderate and severe injuries, but in many instances reflect mildly injured persons not being seen at a hospital.
+</div>
+<div class = "dono">
+Shifting proportion in injury severity may reflect stricter hospital adimission criteria rather than true increases in moderate and sever injuries.
+</div>
+
+<div class = "do">
+Important studies to examine the descriptive epidemiology of autism, including the prevalence and changes in the characteristics of the population over time, have begun. </div>
+<div class = "dono">Studies have begun to describe the epidemiology of autism, including recent changes in the disorder's prevalence and characteristics.</div>
+
+<div class = "dono">There are multiple other mechanisms that are important, 
+but most of them are suspect to only have a small impact or are only important because of impact on one of the three primary mechanism.</div>
+<div class = "do">
+Most other mechanisms play only a small role or work by impacting one of the three primary mechanism.</div>
+
+<div class = "dono">
+After rejecting paths with poor signal-to-noise ratio, we are left with 678 velocity measurements of waves with 7.5 seconds peroid
+and 891 measurements of 15 second waves.</div>
+<div class = "do">
+Rejecting paths with poor signal-to-noise ratio left 678 7.5-second waves and 891 15-second waves. 
+</div>
+
+
+<div class = "dono">It is suspected that the importance of temperature has more to do with impacting rates of other reactions than being a mechanism of disinfection itsefl since ponds are rarely hot enough for tempurature alone to cause disinfection</div>
+<div class = "do">
+Ponds are rarely hot enough for temperture alone to cause disinfection; thus the effect of temperture is likely mediated through its impact on the rates of other reactions.
+</div>
+
+
+<div class = "dono"></div>
+<div class = "do"></div>
+
+
+
+<div class = "dono"></div>
+<div class = "do"></div>
+
+
+#### Punctuations
+<div class = "dono">Many types of tissues and cells develop a kind of directionality. Certain events happen toward one end of the tissue or cell to another. It's a phenomenon called cell polarity.</div>
+<div class = "do">Many types of tissues and cells develop a kind of directionality called polarity: certain events happen toward one end of the tissue or cell to another.</div>
+
+
+
+<div class = "dono">Evidence-based medicine teaches clinicians the practical application of clinical epidemiology, as needed to address specific problems of specific patients. It guides clinicians on how to find the best evidence relevant to a specific problem, how to assess the quality of that evidence, and perhaps most difficult, how to decide if the evidence applies to a specific patient. 
+Finally, the lessons of clinical epidemiology are not meant to be limited to academic physician-epidemiologists, 
+who sometimes have more interest in analyzing data than caring for patients.  Clinical epidemiology holds the promise of providing clinicians with the tools necessary to improve the outcomes of their patients. </div>
+
+<div class = "do">
+Evidence-based medicine teaches clinicians the practical application of clinical epidemiology:
+how to find the best evidence relevant to a spcific problem, how to access the quality of that evidence, and how to decide if the evidence applies to a specific patient.
+Finally, the lessons of clinical epidemiology are not limited to academic physician-epidemiologists 
+-- who sometimes have more interest in analyzing data than caring for patients -- but provide clinicians with the tools to improve their patients' outcomes. 
+</div>
+
+<div class = "dono">
+</div>
+<div class = "do">
+
+</div>
+
+
+
+<div class = "dono"></div>
+<div class = "do"></div>
+
+
+
+

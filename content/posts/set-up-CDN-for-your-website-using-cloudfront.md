@@ -1,7 +1,7 @@
 ---
 title: "Set Up CDN for Your Website using AWS CloudFront"
 date: 2018-03-16T01:09:12-07:00
-draft: false
+draft: true 
 ---
 
 The server of my [home page](https://www.haoxp.xyz) is located at Seattle where both Canadian and American can have fast access to. 
